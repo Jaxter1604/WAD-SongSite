@@ -8,7 +8,13 @@ from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm
 from songeek_project.models import Album, Song
 
 def index(request):
-    return HttpResponse("Hello World!")
+
+    song_list = Song.objects.order_by('-likes')[:5]
+
+    context_dict = {}
+    context_dict['songs'] = song_list
+
+    return render(request, 'songeek/index.html', context = context_dict)
 
 def register(request):
     registered = False

@@ -23,6 +23,7 @@ class Album(models.Model):
 class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
+    listens = models.IntegerField(default=0)
     length = models.IntegerField(default=0)
 
     def __str__(self):
