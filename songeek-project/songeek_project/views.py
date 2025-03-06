@@ -10,9 +10,11 @@ from songeek_project.models import Album, Song
 def index(request):
 
     song_list = Song.objects.order_by('-likes')[:5]
+    albums = Album.objects.all()
 
     context_dict = {}
     context_dict['songs'] = song_list
+    context_dict['albums'] = albums
 
     return render(request, 'songeek/index.html', context = context_dict)
 
@@ -74,3 +76,13 @@ def user_login(request):
 
     else:
         return render(request, 'songeek/login.html')
+
+def album_list(request):
+    albums = Album.objects.all()
+    return render(request, 'albums/album_list.html', {'albums': albums})
+
+
+#example of returning album page with detail
+# def album_detail(request, album_id):
+#     album = get_object_or_404(Album, id=album_id)
+#     return render(request, 'albums/album_detail.html', {'album': album})

@@ -7,7 +7,6 @@ class SongAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'album',
-        'length',
     )
 
 class AlbumAdmin(admin.ModelAdmin):

@@ -14,7 +14,7 @@ class AlbumForm(forms.ModelForm):
 
 class SongForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the song name")
-    length = forms.ImageField(help_text="Please enter the length of the song in seconds.", initial=0)
+    length = forms.DurationField(help_text="Please enter the length of the song.", initial=0)
     listens = forms.IntegerField(widget=forms.HiddenInput, initial=0)
 
     class Meta:
