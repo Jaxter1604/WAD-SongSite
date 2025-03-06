@@ -1,0 +1,32 @@
+def add_song_to_playlist(request):
+    if request.method == "POST":
+        form = SongToPlaylistForm(request.POST)
+        if form.is_valid():
+            playlist = form.cleaned_data['playlist']
+            song = form.cleaned_data['song']
+            new_song_title = form.cleaned_data['new_song_title']
+            album = form.cleaned_data['album']
+            new_album_name = form.cleaned_data['new_album_name']
+            artist = form.cleaned_data['artist']
+
+            # If creating a new song, determine or create its album
+            if not song:
+                if not album:
+                    album, created = Album.objects.get_or_create(
+                        name=new_album_name, 
+                        artist=artist, 
+                        defaults={'slug': slugify(new_album_name)}
+                    )
+                song, created = Song.objects.get_or_create(
+                    album=album, 
+                    title=new_song_title
+                )
+
+            # Add the song to the playlist
+            playlist.songs.add(song)
+            return redirect('songeek:playlist_detail', playlist.slug)
+
+    else:
+        form = SongToPlaylistForm()
+
+    return render(request, 'songeek/add_song_to_playlist.html', {'form': form})

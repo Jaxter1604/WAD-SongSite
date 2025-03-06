@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
+from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm
-from songeek_project.models import Album, Song
+from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm, PlaylistForm, SongToPlaylistForm
+from songeek_project.models import Album, Song, Playlist
 
 def index(request):
 
@@ -77,9 +78,37 @@ def user_login(request):
     else:
         return render(request, 'songeek/login.html')
 
-def album_list(request):
-    albums = Album.objects.all()
-    return render(request, 'albums/album_list.html', {'albums': albums})
+def add_song_to_playlist(request):
+    if request.method == 'POST':
+        form = SongToPlaylistForm(request.POST)
+        if form.is_valid():
+            playlist = form.cleaned_data['playlist']
+            song = form.cleaned_data['song']
+            new_song = form.cleaned_data['new_song']
+            album = form.cleaned_data['album']
+            new_album = form.cleaned_data['new_album']
+            artist = form.cleaned_data['artist']
+
+            if not Song:
+                if not album:
+                    album, created = Album.objects.get_or_create(
+                        name = new_album,
+                        artist = artist,
+                        defaults = {'slug': slugify(new_album)}
+                    )
+                song, created = Song.objects.get_or_create(
+                    album = album,
+                    title = new_song
+                )
+            
+            playlist.songs.add(song)
+            #change to direct to playlist view when added
+            return redirect('/songeek/', playlist.slug)
+
+        else:
+            form = SongToPlaylistForm()
+    
+    return render(request, 'songeek/add_song_to_playlist.html', {'form': form})
 
 
 #example of returning album page with detail

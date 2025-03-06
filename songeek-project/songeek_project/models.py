@@ -8,7 +8,7 @@ from django.conf import settings
 
 class Album(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128,)
+    name = models.CharField(max_length=128)
     artist = models.CharField(max_length=128)
     likes = models.IntegerField(default=0)
     cover = models.ImageField(upload_to='album_covers', blank = True)
@@ -25,13 +25,30 @@ class Album(models.Model):
         return str(self.name)
 
 class Song(models.Model):
+    id = models.AutoField(primary_key=True)
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs')
     title = models.CharField(max_length=128)
     listens = models.IntegerField(default=0)
-    lenght = models.DurationField(default=0)
+    length = models.DurationField(default=0)
 
     def __str__(self):
         return str(self.title)
+
+class Playlist(models.Model):
+    name = models.CharField(max_length=128)
+    cover = models.ImageField(upload_to='playlist_covers', blank = True)
+    slug = models.SlugField(unique=True)
+    songs = models.ManyToManyField(Song, related_name='playlists', blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Playlist, self).save(*args, **kwargs)
+    
+    class Meta:
+        verbose_name_plural = 'Playlists'
+    
+    def __str__(self):
+        return str(self.name)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
