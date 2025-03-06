@@ -88,13 +88,15 @@ def add_song_to_playlist(request):
             album = form.cleaned_data['album']
             new_album = form.cleaned_data['new_album']
             artist = form.cleaned_data['artist']
+            new_image = form.cleaned_data['new_image']
 
             if not Song:
                 if not album:
                     album, created = Album.objects.get_or_create(
                         name = new_album,
                         artist = artist,
-                        defaults = {'slug': slugify(new_album)}
+                        defaults = {'slug': slugify(new_album),
+                                    'cover': new_image}
                     )
                 song, created = Song.objects.get_or_create(
                     album = album,

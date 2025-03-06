@@ -47,6 +47,7 @@ class SongToPlaylistForm(forms.ModelForm):
     new_song = forms.CharField(max_length=128, required=False, help_text="Enter a new song title (If not selecting above)")
     album = forms.ModelChoiceField(queryset=Album.objects.all(), required=False, help_text="Select an album if adding a new song (or create a new album below)")
     new_album = forms.CharField(max_length=128, required=False, help_text="Enter a new album name (If not selecting above)")
+    new_image = forms.ImageField(required=False, help_text="Upload an image if making a new album")
     artist = forms.CharField(max_length=128, required=False, help_text="Required only if adding a new album")
 
     def clean(self):
@@ -55,6 +56,7 @@ class SongToPlaylistForm(forms.ModelForm):
         new_song = cleaned_data.get("new_song")
         album = cleaned_data.get("album")
         new_album = cleaned_data.get("new_album")
+        new_image = cleaned_data.get('new_image')
         artist = cleaned_data.get("artist")
 
         # Ensure an existing song has an album
@@ -64,5 +66,8 @@ class SongToPlaylistForm(forms.ModelForm):
         # If a new song is provided, an album is required
         if new_song and not (album or new_album):
             raise forms.ValidationError("A new song must be linked to an existing or new album.")
+
+        if new_image and not album:
+            raise forms.ValidationError("A new album should have an album cover.")
 
         return cleaned_data
