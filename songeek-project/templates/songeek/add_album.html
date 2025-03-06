@@ -8,7 +8,7 @@
 {% block body_block %}
     <h1>Add an Album</h1>
     <div>
-        <form id="album_form" method="post" action="{% url 'songeek:add_album' %}">
+        <form id="album_form" method="post" action="{% url 'songeek:add_album' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}

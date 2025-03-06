@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class AlbumForm(forms.ModelForm):
     name = forms.CharField(max_length=128,help_text="Please enter the Album name.")
     artist = forms.CharField(max_length=128, help_text="Please enter Artist name.")
-    album = forms.ImageField(help_text="Upload the Album cover:")
     likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 

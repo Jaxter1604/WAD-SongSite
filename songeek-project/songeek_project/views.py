@@ -20,7 +20,7 @@ def add_album(request):
     form = AlbumForm()
 
     if request.method =='POST':
-        form = AlbumForm(request.POST)
+        form = AlbumForm(request.POST, request.FILES)
         if form.is_valid():
             form.save(commit=True)
             return redirect('/songeek/')
