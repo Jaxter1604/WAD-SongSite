@@ -39,6 +39,7 @@ class Playlist(models.Model):
     cover = models.ImageField(upload_to='playlist_covers', blank = True)
     slug = models.SlugField(unique=True)
     songs = models.ManyToManyField(Song, related_name='playlists', blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -48,7 +49,7 @@ class Playlist(models.Model):
         verbose_name_plural = 'Playlists'
     
     def __str__(self):
-        return str(self.name)
+        return f"{self.name} ({self.user.username})"
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

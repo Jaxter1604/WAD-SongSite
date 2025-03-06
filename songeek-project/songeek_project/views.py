@@ -98,6 +98,7 @@ def add_song_to_playlist(request):
                         defaults = {'slug': slugify(new_album),
                                     'cover': new_image}
                     )
+                    
                 song, created = Song.objects.get_or_create(
                     album = album,
                     title = new_song
