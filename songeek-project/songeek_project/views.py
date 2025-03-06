@@ -16,6 +16,18 @@ def index(request):
 
     return render(request, 'songeek/index.html', context = context_dict)
 
+def add_album(request):
+    form = AlbumForm()
+
+    if request.method =='POST':
+        form = AlbumForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/songeek/')
+        else:
+            print(form.errors)
+    return render(request, 'songeek/add_album.html', {'form': form})
+
 def register(request):
     registered = False
 
