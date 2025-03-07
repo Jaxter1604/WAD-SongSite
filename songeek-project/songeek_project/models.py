@@ -86,4 +86,20 @@ class AlbumReview(models.Model):
     # not sure if this is needed or correct
     def __str__(self):
         return str(self.id)
+
+class SongReview(models.Model):
+    id = models.AutoField(primary_key=True)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(default = 1)
+    review = models.TextField(max_length=1000)
+    timeStamp = models.DateTimeField(auto_now_add=True)
+
+    # spacing may not work for plural
+    class Meta:
+        verbose_name_plural = 'Song Reviews'
+
+    # not sure if this is needed or correct
+    def __str__(self):
+        return str(self.id)
     

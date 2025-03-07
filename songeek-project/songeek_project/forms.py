@@ -1,5 +1,5 @@
 from django import forms
-from songeek_project.models import Song, Album, Playlist, UserProfile, AlbumReview
+from songeek_project.models import Song, Album, Playlist, UserProfile, AlbumReview, SongReview
 from django.contrib.auth.models import User
 
 # Basic add album form
@@ -113,4 +113,12 @@ class AlbumReviewForm(forms.ModelForm):
 
     class Meta:
         model = AlbumReview
+        fields = ('rating', 'review')
+
+class SongReviewForm(forms.ModelForm):
+    rating = forms.ChoiceField(choices=rate_scale, widget=forms.RadioSelect(), help_text="Please select a rating of 1-5")
+    review = forms.CharField(widget=forms.Textarea, max_length=1000, help_text="Write a review")
+
+    class Meta:
+        model = SongReview
         fields = ('rating', 'review')
