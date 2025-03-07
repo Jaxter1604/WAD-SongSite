@@ -31,6 +31,15 @@ def add_album(request):
             print(form.errors)
     return render(request, 'songeek/add_album.html', {'form': form})
 
+def album_list(request):
+    
+    albums = Album.objects.all()
+
+    context_dict = {}
+    context_dict['albums'] = albums
+
+    return render(request, 'songeek/album_list.html', context = context_dict)
+
 def register(request):
     registered = False
 
@@ -98,7 +107,7 @@ def add_song_to_playlist(request):
                         defaults = {'slug': slugify(new_album),
                                     'cover': new_image}
                     )
-                    
+
                 song, created = Song.objects.get_or_create(
                     album = album,
                     title = new_song

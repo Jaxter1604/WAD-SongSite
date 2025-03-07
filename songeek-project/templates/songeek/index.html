@@ -6,13 +6,18 @@
 {% endblock %}
 
 {% block body_block %}
+<ul>
 {% for album in albums %}
-    <a href="{% url 'songeek:album_list' album.slug %}">
-        <img src="{{ album.cover.url }}" alt="{{ album.title }}" width="150">
-        <h2>{{ album.title }}</h2>
-        <p>By {{ album.artist }}</p>
-    </a>
+<li>
+    <img src="{{ album.cover.url }}" alt="{{ album.title }}" width="150">
+    <h2>{{ album.title }}</h2>
+    <p>By {{ album.artist }}</p>
+</li>  
 {% endfor %}
+</ul>   
 </hr>
-    <a href="{% url 'songeek:add_album' %}">Add Album</a>
+<ul>
+    <li><a href="{% url 'songeek:add_album' %}">Add Album</a></li>
+    <li><a href="{% url 'songeek:album_list' %}">See All Albums</a></li>
+</ul>
 {% endblock %}

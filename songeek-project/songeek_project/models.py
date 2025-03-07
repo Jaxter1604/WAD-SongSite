@@ -76,7 +76,7 @@ class AlbumReview(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(default = 1)
-    review = models.TextField(max_length=100)
+    review = models.TextField(max_length=1000)
     timeStamp = models.DateTimeField(auto_now_add=True)
 
     # spacing may not work for plural
