@@ -64,13 +64,16 @@ class PlaylistForm(forms.ModelForm):
 
 # this form may contain the most issues but can only test when page made
 class SongToPlaylistForm(forms.ModelForm):
-    playlist = forms.ModelChoiceField(queryset=Playlist.objects.all(), help_text="Select a Playlist")
     song = forms.ModelChoiceField(queryset=Song.objects.all(), required=False, help_text="Choose a song or enter a new one below")
     new_song = forms.CharField(max_length=128, required=False, help_text="Enter a new song title (If not selecting above)")
     album = forms.ModelChoiceField(queryset=Album.objects.all(), required=False, help_text="Select an album if adding a new song (or create a new album below)")
     new_album = forms.CharField(max_length=128, required=False, help_text="Enter a new album name (If not selecting above)")
     new_image = forms.ImageField(required=False, help_text="Upload an image if making a new album")
     artist = forms.CharField(max_length=128, required=False, help_text="Required only if adding a new album")
+
+    class Meta:
+        model = Playlist
+        fields = ('song', 'album', 'new_song', 'new_album', 'artist')
 
     def clean(self):
         cleaned_data = super().clean()

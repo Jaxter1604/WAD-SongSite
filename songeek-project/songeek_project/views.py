@@ -88,10 +88,11 @@ def user_login(request):
         return render(request, 'songeek/login.html')
 
 def add_song_to_playlist(request):
+    form = SongToPlaylistForm()
     if request.method == 'POST':
-        form = SongToPlaylistForm(request.POST)
+        form = SongToPlaylistForm(request.POST, request.FILES)
         if form.is_valid():
-            playlist = form.cleaned_data['playlist']
+            form.save(commit=True)
             song = form.cleaned_data['song']
             new_song = form.cleaned_data['new_song']
             album = form.cleaned_data['album']
@@ -116,9 +117,8 @@ def add_song_to_playlist(request):
             playlist.songs.add(song)
             #change to direct to playlist view when added
             return redirect('/songeek/', playlist.slug)
-
         else:
-            form = SongToPlaylistForm()
+            print(form.errors)
     
     return render(request, 'songeek/add_song_to_playlist.html', {'form': form})
 
