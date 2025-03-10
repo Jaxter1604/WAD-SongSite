@@ -19,6 +19,7 @@ def index(request):
 
     return render(request, 'songeek/index.html', context = context_dict)
 
+@login_required
 def add_album(request):
     form = AlbumForm()
 
@@ -87,6 +88,12 @@ def user_login(request):
     else:
         return render(request, 'songeek/login.html')
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('songeek:index'))
+
+@login_required
 def add_song_to_playlist(request):
     form = SongToPlaylistForm()
     if request.method == 'POST':
