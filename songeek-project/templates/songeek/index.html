@@ -1,0 +1,28 @@
+{% extends 'songeek/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Homepage
+{% endblock %}
+
+{% block body_block %}
+<ul>
+{% for album in albums %}
+<li>
+    {% if album.cover %}
+        <img src="{{ album.cover.url }}" alt="{{ album.title }}" width="150">
+    {% else %}
+        <img src="{% static 'images/default_cover.jpg' %}" alt="Default Cover" width="150">
+    {% endif %}
+    <h2>{{ album.name }}</h2>
+    <p>By {{ album.artist }}</p>
+</li>  
+{% endfor %}
+</ul>   
+</hr>
+<ul>
+    <li><a href="{% url 'songeek:add_album' %}">Add Album</a></li>
+    <li><a href="{% url 'songeek:album_list' %}">See All Albums</a></li>
+    <li><a href="{% url 'songeek:add_song_to_playlist' %}">Add a song to a playlist</a></li>
+</ul>
+{% endblock %}

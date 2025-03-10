@@ -1,0 +1,14 @@
+{% extends 'songeek/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<ul>
+    {% for album in albums %}
+    <li>
+        <img src="{{ album.cover.url }}" alt="{{ album.title }}" width="150">
+        <h2>{{ album.title }}</h2>
+        <p>By {{ album.artist }}</p>
+    </li>  
+    {% endfor %}
+</ul>   
+{% endblock %}
