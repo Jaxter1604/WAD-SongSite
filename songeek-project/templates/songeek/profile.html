@@ -1,0 +1,13 @@
+{% extends 'songeek/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<ul>
+    {% for playlist in playlists %}
+    <li>
+        <img src="{{ playlist.cover.url }}" alt="{{ playlist.title }}" width="150">
+        <h2>{{ playlist.title }}</h2>
+    </li>  
+    {% endfor %}
+</ul>   
+{% endblock %}

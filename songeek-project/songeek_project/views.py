@@ -52,7 +52,7 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            profile = profile_form.save(commit=False)
+            profile = profile_form.save(commit=True)
             profile.user = user
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
@@ -94,6 +94,22 @@ def user_logout(request):
     return redirect(reverse('songeek:index'))
 
 @login_required
+def new_playlist(request):
+    form = PlaylistForm()
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form = PlaylistForm(request.POST, request.FILES)
+            playlist = form.save(commit=False)
+            playlist.user = request.user
+            playlist.save()
+            return redirect('/songeek/')
+        else:
+            print(form.errors)
+    
+    return render(request, 'songeek/new_playlist.html', {'form': form})
+    
+@login_required
 def add_song_to_playlist(request):
     form = SongToPlaylistForm()
     if request.method == 'POST':
@@ -128,6 +144,16 @@ def add_song_to_playlist(request):
             print(form.errors)
     
     return render(request, 'songeek/add_song_to_playlist.html', {'form': form})
+
+@login_required
+def profile(request):
+
+    playlists = Playlist.objects.filter(user=request.user)
+
+    context_dict = {}
+    context_dict['playlist'] = playlists
+
+    return render(request, 'songeek/profile.html', context=context_dict)
 
 
 #example of returning album page with detail

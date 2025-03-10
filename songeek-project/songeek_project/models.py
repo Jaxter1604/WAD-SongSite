@@ -46,7 +46,7 @@ class Playlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     cover = models.ImageField(upload_to='playlist_covers', blank = True)
-    songs = models.ManyToManyField(Song, related_name='playlists', blank=True)
+    songs = models.ManyToManyField(Song, related_name='playlists', blank = True)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):

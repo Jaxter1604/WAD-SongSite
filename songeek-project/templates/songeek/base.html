@@ -21,9 +21,18 @@
         <hr />
         <div>
             <ul>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'songeek:add_album' %}">Add an new Album</a></li>
+                    <li><a href="{% url 'songeek:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'songeek:login' %}">Login</a></li>
+                    <li><a href="{% url 'songeek:register' %}">Register</a></li>
+                {% endif %}
+
+                <li><a href="{% url 'songeek:album_list' %}">See All Albums</a></li>
                 <li><a href="{% url 'songeek:index' %}">Home</a></li>
-                <li><a href="{% url 'songeek:login' %}">Login</a></li>
-                <li><a href="{% url 'songeek:register' %}">Register</a></li>
+
             </ul>
         </div>
     </body>
