@@ -19,6 +19,7 @@ class Album(models.Model):
 
     class Meta:
         verbose_name_plural = 'Albums'
+        app_label = 'songeek_project'
 
     def __str__(self):
         return str(self.name)
@@ -51,6 +52,7 @@ class Playlist(models.Model):
     
     class Meta:
         verbose_name_plural = 'Playlists'
+        app_label = 'songeek_project'
     
     def __str__(self):
         return str(self.title)
@@ -73,4 +75,5 @@ class Review(models.Model):
 
     class Meta:
         unique_together = (('user', 'album'), ('user', 'song'))
+        app_label = 'songeek_project'
     
