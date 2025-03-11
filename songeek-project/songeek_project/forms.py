@@ -1,5 +1,5 @@
 from django import forms
-from songeek_project.models import Song, Album, Playlist, UserProfile, AlbumReview, SongReview
+from songeek_project.models import Song, Album, Playlist, UserProfile, Review
 from django.contrib.auth.models import User
 
 # Basic add album form
@@ -102,30 +102,8 @@ class SongToPlaylistForm(forms.ModelForm):
 
         return cleaned_data
 
-
-rate_scale = [
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, '4'),
-    (5, '5')
-]
-
-# basic form view fro writing a review
-# should function on Album page as long as passed to context_dict
-# radio field testing is needed as not sure if result will pass through
-class AlbumReviewForm(forms.ModelForm):
-    rating = forms.ChoiceField(choices=rate_scale, widget=forms.RadioSelect(), help_text="Please select a rating of 1-5")
-    review = forms.CharField(widget=forms.Textarea, max_length=1000, help_text="Write a review")
-
+class ReviewForm(forms.ModelForm):
     class Meta:
-        model = AlbumReview
-        fields = ('rating', 'review')
-
-class SongReviewForm(forms.ModelForm):
-    rating = forms.ChoiceField(choices=rate_scale, widget=forms.RadioSelect(), help_text="Please select a rating of 1-5")
-    review = forms.CharField(widget=forms.Textarea, max_length=1000, help_text="Write a review")
-
-    class Meta:
-        model = SongReview
-        fields = ('rating', 'review')
+        model = Review
+        fields = ('rating', 'comment')
+        

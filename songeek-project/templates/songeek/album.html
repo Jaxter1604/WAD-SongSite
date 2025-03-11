@@ -28,6 +28,31 @@
             <a href="{% url 'songeek:add_song_to_album' album.slug %}">Add Song</a><br />
         {% endif %}
 
+        <h2>Reviews</h2>
+        {% if reviews %}
+            {% for review in reviews %}
+                <p><strong>{{ review.user.username }}</strong>: ★{{ review.rating }} - {{ review.comment }}</p>
+            {% endfor %}
+        {% else %}
+            <p>No reviews yet. Be the first to review this album!</p>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <h3>Leave a Review</h3>
+                <form id='review_form' method="post" action="{% url 'songeek:show_album' album.slug %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        {{ field }}
+                     {% endfor %}
+                    <input type="submit" name="submit" value="Leave a Review" />
+                </form>
+        {% endif %}
+
     {% else %}
         <strong>The specified category does not exist.</strong>
     {% endif %}

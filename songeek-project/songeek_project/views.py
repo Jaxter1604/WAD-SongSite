@@ -5,8 +5,8 @@ from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm, PlaylistForm, SongToPlaylistForm
-from songeek_project.models import Album, Song, Playlist
+from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm, PlaylistForm, SongToPlaylistForm, ReviewForm
+from songeek_project.models import Album, Song, Playlist, Review
 
 def index(request):
 
@@ -58,11 +58,29 @@ def show_album(request, album_name_slug):
     try:
         album = Album.objects.get(slug=album_name_slug)
         songs = Song.objects.filter(album=album)
+        reviews = Review.objects.filter(album=album)
+        form = ReviewForm()
+
+        if request.method == 'POST':
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.album = album
+                review.user  = request.user
+                review.save()
+            return redirect(reverse('songeek:show_album',
+                    kwargs={'album_name_slug': album_name_slug}))
+
         context_dict['songs'] = songs
         context_dict['album'] = album
+        context_dict['reviews'] = reviews
+        context_dict['form'] = form
     except Album.DoesNotExist:
         context_dict['songs'] = None
         context_dict['album'] = None
+        context_dict['reviews'] = None
+        context_dict['form'] = None
+
     return render(request, 'songeek/album.html', context=context_dict)
 
 def album_list(request):
@@ -185,7 +203,6 @@ def profile(request):
 
     context_dict = {'playlists': playlists}
     return render(request, 'songeek/profile.html', context=context_dict)
-
 
 #example of returning album page with detail
 # def album_detail(request, album_id):

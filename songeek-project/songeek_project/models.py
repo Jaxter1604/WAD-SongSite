@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 # model works with example in admin database and index.html
 # (index.html as of 7/3/25 8:50)
 class Album(models.Model):
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
     artist = models.CharField(max_length=128)
     likes = models.IntegerField(default=0)
@@ -30,7 +29,6 @@ class Album(models.Model):
 # avoids needing to use complex form cleaning like with
 # adding songs to playlists
 class Song(models.Model):
-    id = models.AutoField(primary_key=True)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
     listens = models.IntegerField(default=0)
@@ -65,38 +63,14 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-# might not need Primary key for id here
-# must be owned by a user and belong to an album and its page
-# review will be restricted between 1-5 or 1-10, 0 NA
-# automatic timestamp
-class AlbumReview(models.Model):
-    id = models.AutoField(primary_key=True)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(default = 1)
-    review = models.TextField(max_length=1000)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=True)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, null=True, blank=True)
+    rating = models.PositiveSmallIntegerField(choices = [(i, i) for i in range(1,6)])
+    comment = models.TextField(blank=True)
     timeStamp = models.DateTimeField(auto_now_add=True)
 
-    # spacing may not work for plural
     class Meta:
-        verbose_name_plural = 'Album Reviews'
-
-    def __str__(self):
-        return str(self.id)
-
-class SongReview(models.Model):
-    id = models.AutoField(primary_key=True)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.PositiveSmallIntegerField(default = 1)
-    review = models.TextField(max_length=1000)
-    timeStamp = models.DateTimeField(auto_now_add=True)
-
-    # spacing may not work for plural
-    class Meta:
-        verbose_name_plural = 'Song Reviews'
-
-    # not sure if this is needed or correct
-    def __str__(self):
-        return str(self.id)
+        unique_together = (('user', 'album'), ('user', 'song'))
     
