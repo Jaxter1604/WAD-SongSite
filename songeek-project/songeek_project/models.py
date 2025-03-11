@@ -31,7 +31,7 @@ class Album(models.Model):
 # adding songs to playlists
 class Song(models.Model):
     id = models.AutoField(primary_key=True)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs')
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
     listens = models.IntegerField(default=0)
     length = models.DurationField(default=0)
@@ -71,7 +71,7 @@ class UserProfile(models.Model):
 # automatic timestamp
 class AlbumReview(models.Model):
     id = models.AutoField(primary_key=True)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='reviews')
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(default = 1)
     review = models.TextField(max_length=1000)
@@ -87,7 +87,7 @@ class AlbumReview(models.Model):
 
 class SongReview(models.Model):
     id = models.AutoField(primary_key=True)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE, related_name='reviews')
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(default = 1)
     review = models.TextField(max_length=1000)

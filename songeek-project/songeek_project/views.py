@@ -32,6 +32,39 @@ def add_album(request):
             print(form.errors)
     return render(request, 'songeek/add_album.html', {'form': form})
 
+@login_required
+def add_song_to_album(request, album_name_slug):
+    try:
+        album = Album.objects.get(slug=album_name_slug)
+    except Album.DoesNotExist:
+        album = None
+    form = SongForm()
+
+    if request.method == 'POST':
+        form = SongForm(request.POST)
+        if form.is_valid():
+            song = form.save(commit=False)
+            song.album = album
+            song.save()
+            return redirect(reverse('songeek:show_album',
+                    kwargs={'album_name_slug': album_name_slug}))
+        else:
+            print(form.errors)
+    return render(request, 'songeek/add_song_to_album.html', {'form': form, 'album': album})
+
+def show_album(request, album_name_slug):
+    context_dict = {}
+
+    try:
+        album = Album.objects.get(slug=album_name_slug)
+        songs = Song.objects.filter(album=album)
+        context_dict['songs'] = songs
+        context_dict['album'] = album
+    except Album.DoesNotExist:
+        context_dict['songs'] = None
+        context_dict['album'] = None
+    return render(request, 'songeek/album.html', context=context_dict)
+
 def album_list(request):
     
     albums = Album.objects.all()
@@ -145,6 +178,7 @@ def add_song_to_playlist(request):
     
     return render(request, 'songeek/add_song_to_playlist.html', {'form': form})
 
+#filter playlists by user id and return
 @login_required
 def profile(request):
     playlists = Playlist.objects.filter(user=request.user)
