@@ -52,7 +52,7 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            profile = profile_form.save(commit=True)
+            profile = profile_form.save(commit=False)
             profile.user = user
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
@@ -98,15 +98,15 @@ def new_playlist(request):
     form = PlaylistForm()
 
     if request.method == 'POST':
+        form = PlaylistForm(request.POST, request.FILES)
         if form.is_valid():
-            form = PlaylistForm(request.POST, request.FILES)
             playlist = form.save(commit=False)
             playlist.user = request.user
             playlist.save()
-            return redirect('/songeek/')
+            return redirect('/songeek/')  
         else:
-            print(form.errors)
-    
+            print(form.errors)  
+
     return render(request, 'songeek/new_playlist.html', {'form': form})
     
 @login_required
@@ -147,12 +147,9 @@ def add_song_to_playlist(request):
 
 @login_required
 def profile(request):
-
     playlists = Playlist.objects.filter(user=request.user)
 
-    context_dict = {}
-    context_dict['playlist'] = playlists
-
+    context_dict = {'playlists': playlists}
     return render(request, 'songeek/profile.html', context=context_dict)
 
 

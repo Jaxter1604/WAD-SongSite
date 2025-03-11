@@ -1,13 +1,25 @@
 {% extends 'songeek/base.html' %}
-{% load staticfiles %}
+
+{% block title_block %}
+    Your Profile
+{% endblock %}
 
 {% block body_block %}
-<ul>
-    {% for playlist in playlists %}
-    <li>
-        <img src="{{ playlist.cover.url }}" alt="{{ playlist.title }}" width="150">
-        <h2>{{ playlist.title }}</h2>
-    </li>  
-    {% endfor %}
-</ul>   
+    <h1>Your Profile</h1>
+    
+    <h2>Your Playlists</h2>
+    <div>
+        {% for playlist in playlists %}
+            <div>
+                <h3>{{ playlist.name }}</h3>
+                {% if playlist.cover %}
+                    <img src="{{ playlist.cover.url }}" alt="{{ playlist.name }}" width="200">
+                {% else %}
+                    <p>No cover image</p>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>You have no playlists.</p>
+        {% endfor %}
+    </div>
 {% endblock %}
