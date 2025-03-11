@@ -1,8 +1,6 @@
-import os
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-from django.conf import settings
 
 # Create your models here.
 
@@ -57,7 +55,7 @@ class Playlist(models.Model):
         verbose_name_plural = 'Playlists'
     
     def __str__(self):
-        return f"{self.name} ({self.user.username})"
+        return str(self.title)
 
 #basic user model from rango
 class UserProfile(models.Model):
