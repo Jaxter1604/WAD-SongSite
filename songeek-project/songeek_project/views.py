@@ -10,7 +10,7 @@ from songeek_project.models import Album, Song, Playlist
 
 def index(request):
 
-    song_list = Song.objects.order_by('-likes')[:5]
+    song_list = Song.objects.order_by('-listens')[:5]
     albums = Album.objects.all()
 
     context_dict = {}

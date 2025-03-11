@@ -43,6 +43,8 @@ class UserProfileForm(forms.ModelForm):
         fields = ('picture',)
 
 # create a new playlist and uploiad a cover image
+# Playlist is assigned to user profile and only
+# callable from that user
 class PlaylistForm(forms.ModelForm):
     name = forms.CharField(max_length=128, required=True, help_text="Enter Playlist name")
     
@@ -70,6 +72,9 @@ class SongToPlaylistForm(forms.ModelForm):
     new_image = forms.ImageField(required=False, help_text="Upload an image if making a new album")
     artist = forms.CharField(max_length=128, required=False, help_text="Required only if adding a new album")
 
+    # formatting for this class is needed in the html file
+    # to distinguish between "new song" fields and
+    # existsing song fields etc
     class Meta:
         model = Playlist
         fields = ('song', 'album', 'new_song', 'new_album', 'artist')

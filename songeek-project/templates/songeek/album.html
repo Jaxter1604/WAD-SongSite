@@ -12,6 +12,8 @@
 {% block body_block %}
     {% if album %}
         <h1>{{ album.name }}</h1>
+        <h2>{{ album.artist }}</h2>
+        <img src="{{ album.cover.url }}" alt="{{ album.name }}" width="300">
         {% if songs %}
         <ul>
             {% for song in songs %}

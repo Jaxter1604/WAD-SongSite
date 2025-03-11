@@ -81,7 +81,6 @@ class AlbumReview(models.Model):
     class Meta:
         verbose_name_plural = 'Album Reviews'
 
-    # not sure if this is needed or correct
     def __str__(self):
         return str(self.id)
 
