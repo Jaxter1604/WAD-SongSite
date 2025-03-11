@@ -9,12 +9,11 @@ from django.contrib.auth.models import User
 class AlbumForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Please enter the Album name:")
     artist = forms.CharField(max_length=128, help_text="Please enter Artist name:")
-    likes = forms.MultipleChoiceField(widget=forms.HiddenInput())
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Album
-        fields = ('name', 'artist', 'likes', 'cover')
+        fields = ('name', 'artist', 'cover')
 
 # basic form layout similar to album
 # minor testing needed especially with length field

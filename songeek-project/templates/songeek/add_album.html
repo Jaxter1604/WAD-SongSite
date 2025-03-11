@@ -2,11 +2,11 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Add an Album
+    Create a new Album
 {% endblock %}
 
 {% block body_block %}
-    <h1>Add an Album</h1>
+    <h1>Create a new Album</h1>
     <div>
         <form id="album_form" method="post" action="{% url 'songeek:add_album' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -18,7 +18,7 @@
                 {{ field.help_text }}
                 {{ field }}
             {% endfor %}
-            <input type="submit" name="submit" value="Create Album" />
+            <input type="submit" name="submit" value="Create New Album" />
         </form>
     </div>
 {% endblock %}

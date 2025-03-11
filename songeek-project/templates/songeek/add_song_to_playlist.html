@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Add an Album</h1>
+    <h1>Add a song to the playlist</h1>
     <div>
         <form id="song_to_playlist_form" method="post" action="{% url 'songeek:add_song_to_playlist' %}" enctype="multipart/form-data">
             {% csrf_token %}
