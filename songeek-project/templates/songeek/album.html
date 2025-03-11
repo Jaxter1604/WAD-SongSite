@@ -15,7 +15,7 @@
         {% if songs %}
         <ul>
             {% for song in songs %}
-                <li>{{ song.name }}</li>
+                <li>{{ song.title }} - {{ song.length}}</li>
             {% endfor %}
         </ul>
         {% else %}
