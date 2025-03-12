@@ -159,22 +159,46 @@ def new_playlist(request):
             print(form.errors)  
 
     return render(request, 'songeek/new_playlist.html', {'form': form})
+
+@login_required
+def show_playlist(request, playlist_name_slug):
+    context_dict = {}
+
+    try:
+        playlist = Playlist.objects.get(slug=playlist_name_slug, user=request.user)
+        songs = playlist.songs.all()
+
+        context_dict['songs'] = songs
+        context_dict['playlist'] = playlist
+
+    except Album.DoesNotExist:
+        context_dict['songs'] = None
+        context_dict['playlist'] = None
+
+    return render(request, 'songeek/playlist.html', context=context_dict)
     
 @login_required
-def add_song_to_playlist(request):
+def add_song_to_playlist(request, playlist_name_slug):
+
+    try:
+        playlist = Playlist.objects.get(slug=playlist_name_slug, user=request.user)
+    except Playlist.DoesNotExist:
+        return HttpResponse("Playlist not found")
+
     form = SongToPlaylistForm()
     if request.method == 'POST':
         form = SongToPlaylistForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(commit=True)
+            form.save(commit=False)
             song = form.cleaned_data['song']
             new_song = form.cleaned_data['new_song']
+            length = form.cleaned_data['length']
             album = form.cleaned_data['album']
             new_album = form.cleaned_data['new_album']
             artist = form.cleaned_data['artist']
             new_image = form.cleaned_data['new_image']
 
-            if not Song:
+            if not song:
                 if not album:
                     album, created = Album.objects.get_or_create(
                         name = new_album,
@@ -185,16 +209,18 @@ def add_song_to_playlist(request):
 
                 song, created = Song.objects.get_or_create(
                     album = album,
-                    title = new_song
+                    title = new_song,
+                    length = length
                 )
             
             playlist.songs.add(song)
             #change to direct to playlist view when added
-            return redirect('/songeek/', playlist.slug)
+            return redirect(reverse('songeek:show_playlist',
+                    kwargs={'playlist_name_slug': playlist_name_slug}))
         else:
             print(form.errors)
     
-    return render(request, 'songeek/add_song_to_playlist.html', {'form': form})
+    return render(request, 'songeek/add_song_to_playlist.html', {'form': form, 'playlist': playlist})
 
 #filter playlists by user id and return
 @login_required

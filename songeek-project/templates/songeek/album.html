@@ -31,7 +31,7 @@
         <h2>Reviews</h2>
         {% if reviews %}
             {% for review in reviews %}
-                <p><strong>{{ review.user.username }}</strong>: ★{{ review.rating }} - {{ review.comment }}</p>
+                <p><strong>{{ review.user.username }}</strong>: ★{{ review.rating }} - {{ review.comment }} - {{ review.timeStamp }}</p>
             {% endfor %}
         {% else %}
             <p>No reviews yet. Be the first to review this album!</p>
@@ -54,6 +54,6 @@
         {% endif %}
 
     {% else %}
-        <strong>The specified category does not exist.</strong>
+        <strong>The specified album does not exist.</strong>
     {% endif %}
 {% endblock %}

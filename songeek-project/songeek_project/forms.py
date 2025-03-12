@@ -67,10 +67,11 @@ class PlaylistForm(forms.ModelForm):
 class SongToPlaylistForm(forms.ModelForm):
     song = forms.ModelChoiceField(queryset=Song.objects.all(), required=False, help_text="Choose a song or enter a new one below")
     new_song = forms.CharField(max_length=128, required=False, help_text="Enter a new song title (If not selecting above)")
+    length = forms.DurationField(initial=0, help_text="Please enter the length if making a new song")
     album = forms.ModelChoiceField(queryset=Album.objects.all(), required=False, help_text="Select an album if adding a new song (or create a new album below)")
     new_album = forms.CharField(max_length=128, required=False, help_text="Enter a new album name (If not selecting above)")
     new_image = forms.ImageField(required=False, help_text="Upload an image if making a new album")
-    artist = forms.CharField(max_length=128, required=False, help_text="Required only if adding a new album")
+    artist = forms.CharField(max_length=128, required=False, help_text="enter the artist - required only if adding a new album")
 
     # formatting for this class is needed in the html file
     # to distinguish between "new song" fields and

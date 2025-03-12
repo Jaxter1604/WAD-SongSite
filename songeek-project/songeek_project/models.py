@@ -66,7 +66,7 @@ class UserProfile(models.Model):
         return self.user.username
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=True)
     song = models.ForeignKey(Song, on_delete=models.CASCADE, null=True, blank=True)
     rating = models.PositiveSmallIntegerField(choices = [(i, i) for i in range(1,6)])
