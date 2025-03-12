@@ -230,7 +230,20 @@ def profile(request):
     context_dict = {'playlists': playlists}
     return render(request, 'songeek/profile.html', context=context_dict)
 
-#example of returning album page with detail
-# def album_detail(request, album_id):
-#     album = get_object_or_404(Album, id=album_id)
-#     return render(request, 'albums/album_detail.html', {'album': album})
+def search_results(request):
+    query = request.GET.get('q', '')
+
+    if query:
+        albums = Album.objects.filter(name__icontains=query)
+        songs = Song.objects.filter(title__icontains=query)
+    else:
+        albums = []
+        songs = []
+
+    context_dict = {
+        'query': query,
+        'albums': albums,
+        'songs': songs
+    }
+
+    return render(request, 'songeek/search_results.html', context=context_dict)

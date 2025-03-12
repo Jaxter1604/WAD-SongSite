@@ -1,0 +1,27 @@
+{% extends 'songeek/base.html' %}
+
+{% block body_block %}
+    <h2>Search Results for "{{ query }}"</h2>
+
+    {% if albums or songs %}
+        {% if albums %}
+            <h3>Albums</h3>
+            <ul>
+                {% for album in albums %}
+                    <li><a href="{% url 'songeek:show_album' album.slug %}">{{ album.name }} by {{ album.artist }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if songs %}
+            <h3>Songs</h3>
+            <ul>
+                {% for song in songs %}
+                    <li>{{ song.title }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+{% endblock %}
