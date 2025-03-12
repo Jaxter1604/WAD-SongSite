@@ -1,0 +1,167 @@
+title {
+    font-family: sans-serif;
+    color: aliceblue;
+    text-align: center;
+    margin: auto;
+    gap: 20px;
+}
+
+.title-container h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    font-family: 'Lucida Sans', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #A9A9A9;
+    font-family: 'Trebuchet MS';
+    flex-direction: column;
+    position: relative;
+    margin: 0;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.login-box {
+    background: #D3D3D3;
+    padding: 50px;
+    border-radius: 15px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.logo-img, .note-icon {
+    width: 80px;
+    height: 60px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #D3D3D3;
+    color:#333;
+}
+
+/*input::placeholder {
+    color: #bbb
+} */
+
+input:hover {
+    border: 2px solid white;
+    background-color: #D3D3D3;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container inout {
+    width: 100%;
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-container .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15%;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+/*.signup-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    gap: 5px;
+}*/
+
+.signup-link a {
+    width: 100%;
+    padding: 5px 10px;
+    color: white;
+    background-color: #444;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 30;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    background: #333;
+}
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.footer img {
+    width: 50px;
+    height: auto;
+}

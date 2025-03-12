@@ -8,9 +8,9 @@
 {% block body_block %}
     <h1>Register for Songeek</h1>
     {% if registered %}
-        Rango says: <strong>thank you for registering!</strong>
+        <strong>You're now a listener!</strong>
     {% else %}
-        <strong>register here!</strong><br />
+        <strong>Register here!</strong><br />
         <form id="user_form" method="post" action="{% url 'songeek:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_form.as_p }}
