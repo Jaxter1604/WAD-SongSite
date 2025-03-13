@@ -6,7 +6,9 @@ title {
     gap: 20px;
 }
 
-.title-container h1 {
+/* login page */
+
+.login-page .title-container h1 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +19,41 @@ title {
     font-weight: bold;
 }
 
-body {
+/*sign up */
+
+.register-page .title-container h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    font-family: 'Lucida Sans', sans-serif;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+
+/*general CSS*/
+
+.base-page .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.base-page .login-box, .base-page .register-page {
+    background: #D3D3D3;
+    padding: 50px;
+    border-radius: 15px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.base-page body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,25 +65,13 @@ body {
     margin: 0;
 }
 
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: auto;
+.base-page label {
+    display: block;
+    font-size: 14px;
+    text-align: left;
 }
 
-.login-box {
-    background: #D3D3D3;
-    padding: 50px;
-    border-radius: 15px;
-    text-align: center;
-    width: 400px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-    color: white;
-}
-
-.logo {
+.base-page .logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,58 +79,73 @@ body {
     margin-bottom: 20px;
 }
 
-.logo h1 {
+.base-page .logo h1 {
     font-size: 24px;
     font-weight: bold;
     margin: 10px 0;
 }
 
-.logo-img, .note-icon {
+.base-page .logo-img, .note-icon {
     width: 80px;
     height: 60px;
 }
 
-form {
+.base-box form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-input {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid white;
+.base-box input {
+    width: 100%;
+    color: white;
+}
+
+.login-page input[type="text"],
+.login-page input[type="password"],
+.register-page input[type="text"],
+.register-page input[type="email"],
+.register-page input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #A9A9A9;
     border-radius: 5px;
     background-color: #D3D3D3;
-    color:#333;
+    margin-bottom: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-page input:focus,
+.register-page input:focus {
+    border: 3px solid white;
+    background-color: #D3D3D3;
+    outline: none;
 }
 
 /*input::placeholder {
     color: #bbb
 } */
 
-input:hover {
+.base-box input:hover {
     border: 2px solid white;
-    background-color: #D3D3D3;
 }
 
-.password-container {
+.base-box .password-container {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.password-container inout {
-    width: 100%;
-}
-
-.password-container i {
+.base-box .password-container .eye-icon {
     position: absolute;
     right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
     cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
-.password-container .toggle-password {
+.base-box .password-container .toggle-password {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -115,32 +154,24 @@ input:hover {
     width: 20px;
 }
 
-button {
+.base-box button {
     width: 100%;
     padding: 10px;
     background-color: #444;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
-    margin-top: 15%;
+    margin-top: 10px;
 }
 
-button:hover {
+.base-box button:hover {
     background-color: #333;
 }
 
-/*.signup-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-    gap: 5px;
-}*/
-
-.signup-link a {
+.base-box .signup-link a {
     width: 100%;
-    padding: 5px 10px;
+    padding: 5px 8px;
     color: white;
     background-color: #444;
     border: none;
@@ -151,17 +182,17 @@ button:hover {
     text-decoration: none;
 }
 
-.signup-link a:hover {
+.base-box .signup-link a:hover {
     background: #333;
 }
 
-.footer {
+.base-page .footer {
     position: absolute;
     bottom: 20px;
     right: 20px;
 }
 
-.footer img {
+.base-page .footer img {
     width: 50px;
     height: auto;
 }

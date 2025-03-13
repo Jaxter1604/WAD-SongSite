@@ -48,6 +48,8 @@ def register(request):
                 profile.picture = request.FILES['picture']
             profile.save()
             registered = True
+            login(request, user)
+            #return redirect('homepage')
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -72,11 +74,14 @@ def user_login(request):
             else:
                 return HttpResponse("Your Songeek account is disabled.")
         else:
-            print(f"Invlaid login details: {username}, {password}")
+            print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invlaid login details supplied.")
 
     else:
         return render(request, 'songeek/login.html')
+
+#def homepage(request):
+#    return render(request, 'homepage.html')
 
 def add_song_to_playlist(request):
     if request.method == 'POST':
