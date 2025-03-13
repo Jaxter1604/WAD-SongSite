@@ -2,13 +2,13 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Create a new Album
+    Create a new Playlist
 {% endblock %}
 
 {% block body_block %}
-    <h1>Create a new Album</h1>
+    <h1>Create a new Playlist</h1>
     <div>
-        <form id="album_form" method="post" action="{% url 'songeek:add_album' %}" enctype="multipart/form-data">
+        <form id="playlist_form" method="post" action="{% url 'songeek:new_playlist' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
@@ -18,7 +18,7 @@
                 {{ field.help_text }}
                 {{ field }}
             {% endfor %}
-            <input type="submit" name="submit" value="Create New Album" />
+            <input type="submit" name="submit" value="Create New Playlist" />
         </form>
     </div>
 {% endblock %}

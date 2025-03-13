@@ -1,0 +1,59 @@
+{% extends 'songeek/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {% if album %}
+        {{ album.name }}
+    {% else %}
+        Unknown Album
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+    {% if album %}
+        <h1>{{ album.name }}</h1>
+        <h2>{{ album.artist }}</h2>
+        <img src="{{ album.cover.url }}" alt="{{ album.name }}" width="300">
+        {% if songs %}
+        <ul>
+            {% for song in songs %}
+                <li>{{ song.title }} - {{ song.length}}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>No Songs in current album</strong>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'songeek:add_song_to_album' album.slug %}">Add Song</a><br />
+        {% endif %}
+
+        <h2>Reviews</h2>
+        {% if reviews %}
+            {% for review in reviews %}
+                <p><strong>{{ review.user.username }}</strong>: ★{{ review.rating }} - {{ review.comment }} - {{ review.timeStamp }}</p>
+            {% endfor %}
+        {% else %}
+            <p>No reviews yet. Be the first to review this album!</p>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <h3>Leave a Review</h3>
+                <form id='review_form' method="post" action="{% url 'songeek:show_album' album.slug %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        {{ field }}
+                     {% endfor %}
+                    <input type="submit" name="submit" value="Leave a Review" />
+                </form>
+        {% endif %}
+
+    {% else %}
+        <strong>The specified album does not exist.</strong>
+    {% endif %}
+{% endblock %}

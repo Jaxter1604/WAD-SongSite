@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class SongeekConfig(AppConfig):
-    name = 'songeek'
+    name = 'songeek_project'

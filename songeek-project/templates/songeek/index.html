@@ -6,13 +6,30 @@
 {% endblock %}
 
 {% block body_block %}
+<ul>
 {% for album in albums %}
-    <a href="{% url 'songeek:album_list' album.slug %}">
-        <img src="{{ album.cover.url }}" alt="{{ album.title }}" width="150">
-        <h2>{{ album.title }}</h2>
-        <p>By {{ album.artist }}</p>
+
+<li>
+    <a href="{% url 'songeek:show_album' album.slug %}">
+    <img src="{{ album.cover.url }}" alt="{{ album.name }}" width="150">
+    <h2>{{ album.name }}</h2>
+    <p>By {{ album.artist }}</p>
     </a>
+</li>
+
 {% endfor %}
+</ul>   
 </hr>
-    <a href="{% url 'songeek:add_album' %}">Add Album</a>
+{% if songs %}
+<ul>
+{% for song in songs %}
+    <li>{{ song.title }} - {{ song.length }} - {{ song.album.artist }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+</hr>
+<ul>
+    <li><a href="{% url 'songeek:new_playlist' %}">Create a new Playlist</a></li>
+    <li><a href="{% url 'songeek:profile' %}">Profile</a></li>
+</ul>
 {% endblock %}

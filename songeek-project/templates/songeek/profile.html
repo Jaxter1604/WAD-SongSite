@@ -1,0 +1,27 @@
+{% extends 'songeek/base.html' %}
+
+{% block title_block %}
+    Your Profile
+{% endblock %}
+
+{% block body_block %}
+    <h1>Your Profile</h1>
+    
+    <h2>Your Playlists</h2>
+    <div>
+        {% for playlist in playlists %}
+            <div>
+                <a href="{% url 'songeek:show_playlist' playlist.slug %}">
+                <h3>{{ playlist.name }}</h3>
+                {% if playlist.cover %}
+                    <img src="{{ playlist.cover.url }}" alt="{{ playlist.name }}" width="200">
+                {% else %}
+                    <p>No cover image</p>
+                {% endif %}
+                </a>
+            </div>
+        {% empty %}
+            <p>You have no playlists.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
