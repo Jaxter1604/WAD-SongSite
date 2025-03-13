@@ -7,7 +7,6 @@ title {
 body {
     display: flex;
     align-items: center;
-    height: 100vh;
     background-color: #A9A9A9;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
