@@ -22,7 +22,7 @@
             <form id="login_form" method="post" action="{% url 'songeek:login' %}">
                 {% csrf_token %}
 
-                Email or username
+                <label>Email or username</label>
                 <input type="text" name="username" placeholder="Email or username" required>
 
                 <label>Password</label>
