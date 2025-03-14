@@ -35,15 +35,16 @@ title {
 
 /*general CSS*/
 
-.base-page .login-container {
+.base-page .login-container, .base-box .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100vh;
     margin: auto;
 }
 
-.base-page .login-box, .base-page .register-page {
+.base-page .login-box, .base-page .register-box {
     background: #D3D3D3;
     padding: 50px;
     border-radius: 15px;
@@ -68,6 +69,7 @@ title {
     display: block;
     font-size: 14px;
     text-align: left;
+    margin-bottom: 5px;
 }
 
 .base-page .logo {
@@ -113,11 +115,12 @@ title {
     margin-bottom: 10px;
     font-size: 14px;
     box-sizing: border-box;
+    color: white;
 }
 
 .login-page input:focus,
 .register-page input:focus {
-    border: 3px solid white;
+    border: 2px solid white;
     background-color: #D3D3D3;
     outline: none;
 }

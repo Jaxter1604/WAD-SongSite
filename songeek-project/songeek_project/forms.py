@@ -31,11 +31,16 @@ class SongForm(forms.ModelForm):
 # tested and working by user
 #need unit tests
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'id': 'id_password'}))
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
+        widgets = {
+            'username':forms.TextInput(attrs={'placeholder': 'Username'}),
+            'email':forms.TextInput(attrs={'placeholder': 'name@domain.com'}),
+
+        }
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

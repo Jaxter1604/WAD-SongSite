@@ -136,17 +136,13 @@ def user_login(request):
                 return HttpResponse("Your Songeek account is disabled.")
         else:
             print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invlaid login details supplied.")
+            return HttpResponse("Invalid login details supplied.")
 
     else:
         return render(request, 'songeek/login.html')
 
-<<<<<<< HEAD
 #def homepage(request):
 #    return render(request, 'homepage.html')
-
-def add_song_to_playlist(request):
-=======
 @login_required
 def user_logout(request):
     logout(request)
@@ -156,7 +152,20 @@ def user_logout(request):
 def new_playlist(request):
     form = PlaylistForm()
 
->>>>>>> main
+    if request.method == 'POST':
+        form = PlaylistForm(request.POST, request.FILES)
+        if form.is_valid():
+            playlist = form.save(commit=False)
+            playlist.user = request.user
+            playlist.save()
+            return redirect('/songeek/')  
+        else:
+            print(form.errors)  
+
+    return render(request, 'songeek/new_playlist.html', {'form': form})
+
+
+def add_song_to_playlist(request):
     if request.method == 'POST':
         form = PlaylistForm(request.POST, request.FILES)
         if form.is_valid():

@@ -22,7 +22,7 @@
             <form id="login_form" method="post" action="{% url 'songeek:login' %}">
                 {% csrf_token %}
 
-                <label>Email or username</label>
+                Email or username
                 <input type="text" name="username" placeholder="Email or username" required>
 
                 <label>Password</label>
@@ -43,15 +43,21 @@
             <img src="{% static 'images/headphones_footer.png' %}" alt="Footer">
         </div>
     </div>
-{% endblock %}
 
-<script>
-function togglePassword() {
-    var passwordField = document.getElementById("password");
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-    } else {
-        passwordField.type = "password";
-    }
-}
-</script>    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const passwordField = document.getElementById("id_password");
+            const togglePassword = document.getElementById("togglePassword");
+
+            togglePassword.addEventListener("click", function () {
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    togglePassword.src = "{% static 'images/eye-open.png' %}";
+                } else {
+                    passwordField.type = "password";
+                    togglePassword.src = "{% static 'images/eye-close.png' %}";
+                }
+            });
+        });
+    </script>
+{% endblock %}
