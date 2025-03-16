@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-
 {% load songeek_template_tags %}
 
-<html>
-    <head>
-        <title>
-            Songeek -
-            {% block title_block %}
-                Welcome to Songeek!
-            {% endblock %}
-        </title>
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    </head>
-    <body>
-        <div>
-            <form action="{% url 'songeek:search_results' %}" method="GET">
-                <input type="text" name="q" placeholder="Search albums or songs..." required>
-                <button type="submit">Search</button>
-            </form>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Songeek - 
+        {% block title_block %}
+            Welcome to Songeek!
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="{% url 'songeek:index' %}" class="navbar-link">Home</a>
         </div>
-        <div>
-            {% block body_block %}
-            {% endblock %}
+        <div class="navbar-right">
+            {% if user.is_authenticated %}
+                <a href="{% url 'songeek:profile' %}" class="navbar-link">Profile</a>
+                <a href="{% url 'songeek:logout' %}" class="navbar-link">Logout</a>
+            {% else %}
+                <a href="{% url 'songeek:login' %}" class="navbar-link">Login</a>
+                <a href="{% url 'songeek:register' %}" class="navbar-link">Register</a>
+            {% endif %}
         </div>
+    </nav>
 
-        <hr />
-        <div>
-            <ul>
+    <!-- Search Form -->
+    <div class="search-form">
+        <form action="{% url 'songeek:search_results' %}" method="GET">
+            <input type="text" name="q" placeholder="Search albums or songs..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
 
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'songeek:add_album' %}">Add an new Album</a></li>
-                    <li><a href="{% url 'songeek:logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'songeek:login' %}">Login</a></li>
-                    <li><a href="{% url 'songeek:register' %}">Register</a></li>
-                {% endif %}
+    <!-- Body Content -->
+    <div class="content">
+        {% block body_block %}
+        {% endblock %}
+    </div>
 
-                <li><a href="{% url 'songeek:album_list' %}">See All Albums</a></li>
-                <li><a href="{% url 'songeek:index' %}">Home</a></li>
+    <hr />
 
-            </ul>
-        </div>
-    </body>
+    <!-- Footer Links -->
+    <div class="footer-links">
+        <ul>
+            <li><a href="{% url 'songeek:album_list' %}" class="footer-link">See All Albums</a></li>
+        </ul>
+    </div>
+
+</body>
 </html>

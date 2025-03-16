@@ -1,119 +1,98 @@
-title {
-    font-family: sans-serif;
-    color: aliceblue;
-    text-align: center;
-    margin: auto;
-    gap: 20px;
-}
-
-.title-container h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 30px;
-    font-family: 'Lucida Sans', sans-serif;
-    font-size: 35px;
-    font-weight: bold;
-}
-
+/* Basic Styles */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #A9A9A9;
-    font-family: 'Trebuchet MS';
-    flex-direction: column;
-    position: relative;
+    font-family: 'Trebuchet MS', sans-serif;
+    background-color: #121212; /* Dark Background */
+    color: white; /* White Text */
     margin: 0;
+    padding: 0;
 }
 
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: auto;
-}
-
-.login-box {
-    background: #D3D3D3;
-    padding: 50px;
-    border-radius: 15px;
-    text-align: center;
-    width: 400px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+a {
+    text-decoration: none;
     color: white;
 }
 
-.logo {
+/* Navbar Styling */
+.navbar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 20px;
+    background-color: #333; /* Dark navbar */
+    padding: 10px 20px;
 }
 
-.logo h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.logo-img, .note-icon {
-    width: 80px;
-    height: 60px;
-}
-
-form {
+.navbar-left, .navbar-right {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
 }
 
-input {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid white;
+.navbar-link {
+    margin: 0 10px;
+    color: white;
+    font-size: 18px;
+    padding: 8px;
+}
+
+.navbar-link:hover {
+    background-color: #444; /* Slightly lighter on hover */
     border-radius: 5px;
-    background-color: #D3D3D3;
-    color:#333;
 }
 
-/*input::placeholder {
-    color: #bbb
-} */
-
-input:hover {
-    border: 2px solid white;
-    background-color: #D3D3D3;
+/* Search Form Styling */
+.search-form {
+    text-align: center;
+    margin-top: 20px;
 }
 
-.password-container {
-    position: relative;
+.search-form form {
+    display: inline-block;
+    text-align: center;
 }
 
-.password-container inout {
-    width: 100%;
+.search-form input {
+    padding: 10px;
+    width: 250px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
 
-.password-container i {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+.search-form button {
+    padding: 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-.password-container .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    width: 20px;
+.search-form button:hover {
+    background-color: #666;
 }
 
+/* Content Block */
+.content {
+    width: 80%;
+    margin: 20px auto;
+}
+
+/* Footer Links */
+.footer-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-link {
+    margin: 10px;
+    font-size: 18px;
+}
+
+.footer-link:hover {
+    color: #bbb; /* Slightly lighter */
+}
+
+/* Customizing Button Style */
 button {
     width: 100%;
     padding: 10px;
@@ -129,13 +108,37 @@ button:hover {
     background-color: #333;
 }
 
-/*.signup-link {
+/* Login/Signup Form Styling */
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
-    gap: 5px;
-}*/
+    width: 100%;
+    margin: auto;
+}
+
+.login-box {
+    background: #333;
+    padding: 50px;
+    border-radius: 15px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+}
+
+input:hover {
+    border: 2px solid white;
+    background-color: #555;
+}
 
 .signup-link a {
     width: 100%;
