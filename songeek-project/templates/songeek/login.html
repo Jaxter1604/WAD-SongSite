@@ -1,5 +1,5 @@
 {% extends 'songeek/base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title_block %}
     Login
@@ -9,12 +9,12 @@
     <div class="login-container">
         <div class="login-box">
             <div class="logo">
-                <img src="{% static 'images/headphones.png' %}" alt="Headphones">
+                <img src="{% static 'website_images/headphones.png' %}" alt="Headphones">
             </div>
 
             <div class="title-container">
                 <h1> Log in to Songeek </h1>
-                <img src="{% static 'images/notes.jpg' %}" alt="Music notes">
+                <img src="{% static 'website_images/notes.jpg' %}" alt="Music notes">
             </div>
 
             <form id="login_form" method="post" action="{% url 'songeek:login' %}">
@@ -26,7 +26,7 @@
                 <label>Password</label>
                 <div class="password-container">
                     <input type="password" name="password" id="password" placeholder="Password" required>
-                    <img src="{% static 'images/eye.jpg' %}" class="toggle-password" onclick="togglePassword()">
+                    <img src="{% static 'website_images/eye.jpg' %}" class="toggle-password" onclick="togglePassword()">
                 </div>
 
                 <button type="submit">Log In</button>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="footer">
-            <img src="{% static 'images/headphones_footer.png' %}" alt="Footer">
+            <img src="{% static 'website_images/headphones_footer.png' %}" alt="Footer">
         </div>
     </div>
 {% endblock %}
