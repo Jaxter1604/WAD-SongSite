@@ -15,10 +15,10 @@
     </head>
     <body class="{% block body_class %}{% endblock %}">
         <div>
-            <form action="{% url 'songeek:search_results' %}" method="GET">
+            <!--<form action="{% url 'songeek:search_results' %}" method="GET">
                 <input type="text" name="q" placeholder="Search albums or songs..." required>
                 <button type="submit">Search</button>
-            </form>
+            </form>-->
         </div>
         <div>
             {% block body_block %}
@@ -32,6 +32,7 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'songeek:add_album' %}">Add an new Album</a></li>
                     <li><a href="{% url 'songeek:logout' %}">Logout</a></li>
+                    <li><a href="{% url 'songeek:new_playlist' %}">Create a new playlist</a></li>
                 {% else %}
                     <li><a href="{% url 'songeek:login' %}">Login</a></li>
                     <li><a href="{% url 'songeek:register' %}">Register</a></li>

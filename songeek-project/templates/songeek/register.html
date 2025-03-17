@@ -5,18 +5,19 @@
     Register
 {% endblock %}
 
-{% block body_class %}base-page base-box register-page{% endblock %}
+{% block body_class %}base-page register-page{% endblock %}
 
 {% block body_block %}
-<div class="register-container">
-    <div class="register-box">
-        <div class="logo">
+<div class="base-box">
+    <div class="logo">
+        <a href="{% url 'songeek:index' %}">
             <img src="{% static 'images/headphones.png' %}" class="logoimg" alt="Headphones">
-        </div>
+        </a>
+    </div>
 
             <div class="title-container">
                 <h1>Sign up for Songeek</h1>
-        </div>
+            </div>
 
         {% if registered %}
             <strong>You're now a listener!</strong>
@@ -24,20 +25,14 @@
             <form id="user_form" method="post" action="{% url 'songeek:register' %}" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <div class="input-container">
                     <label for="id_username">Username</label>
                     {{ user_form.username }}
-                </div>
 
-                <div class="input-container">
                     <label for="id_email">Email</label>
                     {{ user_form.email }}
-                </div>
 
-                <div class="input-container">
                     <label for="id_password">Password</label>
                     {{ user_form.password }}
-                </div>
 
                 <button type="submit">Sign Up</button>
             </form>

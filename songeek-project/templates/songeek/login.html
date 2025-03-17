@@ -5,59 +5,40 @@
     Login
 {% endblock %}
 
-{% block body_class %}base-page base-box login-page{% endblock %}
+{% block body_class %}base-page login-page{% endblock %}
 
 {% block body_block %}
-    <div class="login-container">
-        <div class="login-box">
-            <div class="logo">
-                <img src="{% static 'images/headphones.png' %}" class="logio-img" alt="Headphones">
-            </div>
-
-            <div class="title-container">
-                <h1> Log in to Songeek </h1>
-                <img src="{% static 'images/notes.jpg' %}" alt="Music notes">
-            </div>
-
-            <form id="login_form" method="post" action="{% url 'songeek:login' %}">
-                {% csrf_token %}
-
-                <label>Email or username</label>
-                <input type="text" name="username" placeholder="Email or username" required>
-
-                <label>Password</label>
-                <div class="password-container">
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    <img src="{% static 'images/eye.jpg' %}" class="toggle-password" onclick="togglePassword()">
-                </div>
-
-                <button type="submit">Log In</button>
-
-                <div class="signup-link">
-                    <p>New here? <a href="{% url 'songeek:register' %}">Sign Up</a></p>
-                </div>
-            </form>
+    <div class="base-box">
+        <div class="logo">
+            <a href="{% url 'songeek:index' %}">
+                <img src="{% static 'website_images/headphones.png' %}" class="logio-img" alt="Headphones">
+            </a>
         </div>
 
-        <div class="footer">
-            <img src="{% static 'images/headphones_footer.png' %}" alt="Footer">
+        <div class="title-container">
+            <h1> Log in to Songeek </h1>
+            <img src="{% static 'images/notes.jpg' %}" alt="Music notes">
         </div>
+
+        <form id="login_form" method="post" action="{% url 'songeek:login' %}">
+            {% csrf_token %}
+
+            <label>Email or username</label>
+            <input type="text" name="username" placeholder="Email or username" required>
+
+            <label>Password</label>
+            <div class="password-container">
+                <input type="password" name="password" id="password" placeholder="Password" required>                </div>
+
+            <button type="submit">Log In</button>
+
+            <div class="signup-link">
+                <p>New here? <a href="{% url 'songeek:register' %}">Sign Up</a></p>
+            </div>
+        </form>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const passwordField = document.getElementById("id_password");
-            const togglePassword = document.getElementById("togglePassword");
-
-            togglePassword.addEventListener("click", function () {
-                if (passwordField.type === "password") {
-                    passwordField.type = "text";
-                    togglePassword.src = "{% static 'images/eye-open.png' %}";
-                } else {
-                    passwordField.type = "password";
-                    togglePassword.src = "{% static 'images/eye-close.png' %}";
-                }
-            });
-        });
-    </script>
+<div class="footer">
+    <img src="{% static 'images/headphones_footer.png' %}" alt="Footer">
+</div>
 {% endblock %}

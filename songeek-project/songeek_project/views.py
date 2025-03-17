@@ -11,13 +11,19 @@ from songeek_project.models import Album, Song, Playlist, Review
 def index(request):
 
     song_list = Song.objects.order_by('-listens')[:5]
-    albums = Album.objects.all()
+    albums = Album.objects.all()[:8]
+    
+    user_playlists = None
+    if request.user.is_authenticated:
+        user_playlists = Playlist.objects.filter(user=request.user)[:4]
 
-    context_dict = {}
-    context_dict['songs'] = song_list
-    context_dict['albums'] = albums
+    context_dict = {
+        'songs': song_list,
+        'albums': albums,
+        'user_playlists': user_playlists,
+    }
 
-    return render(request, 'songeek/index.html', context = context_dict)
+    return render(request, 'songeek/index.html', context=context_dict)
 
 @login_required
 def add_album(request):
