@@ -203,8 +203,14 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin: 0;
+    margin: 0 auto;
     width: 450px;
+    gap: 15px;
+}
+
+.base-box form button {
+    display: block;
+    width: 100%;
 }
 
 .logo img {
@@ -261,11 +267,17 @@ html, body {
 
 /* footer -- see how to make one */
 footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: red;
-    padding: 20px 0;
+    padding: 10px 0px;
     position: relative;
     width: 100%;
+    left: 0;
     bottom: 0;
+    margin: 0;
+    z-index: 0;
 }
 
 .footer-container {
@@ -273,12 +285,13 @@ footer {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .footer-icon {
     position: absolute;
     bottom: 10px;
-    right: 20px;
+    right: 0px;
 }
 
 .footer-icon img {
