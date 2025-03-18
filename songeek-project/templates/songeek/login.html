@@ -8,37 +8,35 @@
 {% block body_class %}base-page login-page{% endblock %}
 
 {% block body_block %}
-    <div class="base-box">
-        <div class="logo">
-            <a href="{% url 'songeek:index' %}">
-                <img src="{% static 'website_images/headphones.png' %}" class="logio-img" alt="Headphones">
-            </a>
-        </div>
-
-        <div class="title-container">
-            <h1> Log in to Songeek </h1>
-            <img src="{% static 'images/notes.jpg' %}" alt="Music notes">
-        </div>
-
-        <form id="login_form" method="post" action="{% url 'songeek:login' %}">
-            {% csrf_token %}
-
-            <label>Email or username</label>
-            <input type="text" name="username" placeholder="Email or username" required>
-
-            <label>Password</label>
-            <div class="password-container">
-                <input type="password" name="password" id="password" placeholder="Password" required>                </div>
-
-            <button type="submit">Log In</button>
-
-            <div class="signup-link">
-                <p>New here? <a href="{% url 'songeek:register' %}">Sign Up</a></p>
+    <div class="base-page">
+        <div class="base-box">
+            <div class="logo">
+                <a href="{% url 'songeek:index' %}">
+                    <img src="{% static 'website_images/headphones.png' %}" class="logio-img" alt="Headphones">
+                </a>
             </div>
-        </form>
-    </div>
 
-<div class="footer">
-    <img src="{% static 'images/headphones_footer.png' %}" alt="Footer">
-</div>
+            <div class="title-container">
+                <h1> Log in to Songeek </h1>
+                <!--<img src="{% static 'website_images/notes.jpg' %}" alt="Music notes">-->
+            </div>
+
+            <form id="login_form" method="post" action="{% url 'songeek:login' %}">
+                {% csrf_token %}
+
+                <label>Email or username</label>
+                <input type="text" name="username" placeholder="Email or username" required>
+
+                <label>Password</label>
+                <div class="password-container">
+                    <input type="password" name="password" id="password" placeholder="Password" required>                </div>
+
+                <button type="submit">Log In</button>
+
+                <div class="signup-link">
+                    <p>New here? <a href="{% url 'songeek:register' %}">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

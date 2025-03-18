@@ -27,20 +27,27 @@
 
         <hr />
         <div>
-            <ul>
+            <footer>
+                <div class="footer-container">
+                    <div class="footer-nav">
+                        <ul>
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'songeek:add_album' %}">Add an new Album</a></li>
+                                <li><a href="{% url 'songeek:logout' %}">Logout</a></li>
+                                <li><a href="{% url 'songeek:new_playlist' %}">Create a new playlist</a></li>
+                            {% else %}
+                                <li><a href="{% url 'songeek:login' %}">Login</a></li>
+                                <li><a href="{% url 'songeek:register' %}">Register</a></li>
+                            {% endif %}
 
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'songeek:add_album' %}">Add an new Album</a></li>
-                    <li><a href="{% url 'songeek:logout' %}">Logout</a></li>
-                    <li><a href="{% url 'songeek:new_playlist' %}">Create a new playlist</a></li>
-                {% else %}
-                    <li><a href="{% url 'songeek:login' %}">Login</a></li>
-                    <li><a href="{% url 'songeek:register' %}">Register</a></li>
-                {% endif %}
-
-                <li><a href="{% url 'songeek:album_list' %}">See All Albums</a></li>
-                <li><a href="{% url 'songeek:index' %}">Home</a></li>
-
+                            <li><a href="{% url 'songeek:album_list' %}">See All Albums</a></li>
+                            <li><a href="{% url 'songeek:index' %}">Home</a></li>
+                    </div>
+                    <div class="footer-icon">
+                        <img src="{% static 'website_images/headphones_footer.png' %}" alt="Footer">
+                    </div>
+                </div>
+            </footer>
             </ul>
         </div>
     </body>
