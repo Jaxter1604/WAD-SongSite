@@ -7,7 +7,7 @@
 
 {% block body_block %}
 
-<!-- Top 5 Daily Songs -->
+
 <h3>Top 5 Daily Songs</h3>
 <ul>
     <li style="cursor: pointer;"><span>1.</span> Blinding Lights - The Weeknd
@@ -29,7 +29,7 @@
 
 <hr>
 
-<!-- Rewind Back -->
+
 <h3>Rewind Back</h3>
 <div class="song-box-container">
     {% for song in rewind_songs %}
@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<!-- Discover More -->
+
 <h3>Discover More</h3>
 <div class="song-box-container">
     {% for song in discover_songs %}
@@ -67,7 +67,6 @@
     </div>
 </div>
 
-<!-- Recommendations for Today -->
 <h3>Recommendations for Today</h3>
 <div class="song-box-container">
     {% for song in recommendations %}
@@ -88,7 +87,7 @@
 
 <hr>
 
-<!-- Existing Section (Do not change this part as per your request) -->
+
 {% if songs %}
 <ul>
     {% for song in songs %}

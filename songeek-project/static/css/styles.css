@@ -1,8 +1,8 @@
-/* Basic Styles */
+
 body {
     font-family: 'Trebuchet MS', sans-serif;
-    background-color: #121212; /* Dark Background */
-    color: white; /* White Text */
+    background-color: #121212; 
+    color: white; 
     margin: 0;
     padding: 0;
 }
@@ -12,12 +12,11 @@ a {
     color: white;
 }
 
-/* Navbar Styling */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333; /* Dark navbar */
+    background-color: #333; 
     padding: 10px 20px;
 }
 
@@ -33,11 +32,11 @@ a {
 }
 
 .navbar-link:hover {
-    background-color: #444; /* Slightly lighter on hover */
+    background-color: #444;
     border-radius: 5px;
 }
 
-/* Search Form Styling */
+
 .search-form {
     text-align: center;
     margin-top: 20px;
@@ -71,13 +70,13 @@ a {
     background-color: #666;
 }
 
-/* Content Block */
+
 .content {
     width: 80%;
     margin: 20px auto;
 }
 
-/* Footer Links */
+
 .footer-links {
     text-align: center;
     margin-top: 20px;
@@ -89,10 +88,10 @@ a {
 }
 
 .footer-link:hover {
-    color: #bbb; /* Slightly lighter */
+    color: #bbb;
 }
 
-/* Customizing Button Style */
+
 button {
     width: 100%;
     padding: 10px;
@@ -169,45 +168,44 @@ input:hover {
     height: auto;
 }
 
-/* Top 5 Daily Songs */
+
 .top-songs-list {
-    list-style-type: none;  /* Removes default bullets */
+    list-style-type: none;  
     padding-left: 0;
 }
 
 .top-songs-list li {
     display: flex;
-    align-items: center;  /* Aligns text and image in the same line */
+    align-items: center;  
     font-size: 18px;
     margin-bottom: 10px;
 }
 
-/* Numbering */
+
 .top-songs-list li span {
     font-weight: bold;
     margin-right: 10px;
 }
 
-/* Small image next to the artist's name */
+
 .top-songs-list li img.song-image {
-    width: 10px;  /* Adjusted size to make it more visible */
-    height: 10px; /* Adjusted size */
-    margin-left: 10px;  /* Space between text and image */
-    border-radius: 50%;  /* Rounded image */
-    vertical-align: middle;  /* Align with text */
+    width: 10px;  
+    height: 10px; 
+    margin-left: 10px;  
+    border-radius: 50%; 
+    vertical-align: middle;  
 }
 
 
-/* Container for song images */
 .song-box-container {
     display: flex;
-    flex-direction: row;  /* Arrange items horizontally */
-    gap: 20px;  /* Space between boxes */
+    flex-direction: row; 
+    gap: 20px;  
     margin-top: 20px;
-    overflow-x: auto; /* Allows horizontal scrolling */
+    overflow-x: auto; 
 }
 
-/* Each individual song box */
+
 .song-box {
     width: 120px;
     height: 120px;
@@ -221,6 +219,6 @@ input:hover {
 .song-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* Ensures images cover the box without distortion */
+    object-fit: cover; 
     border-radius: 10px;
 }
