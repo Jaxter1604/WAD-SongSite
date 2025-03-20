@@ -7,7 +7,7 @@ html, body {
     display: block;
     padding: 0;
     flex-direction: column;
-    background-color: #A9A9A9;
+    background-color: #121212;
     font-family: 'Lucida Sans', sans-serif;
     margin: 0;
     overflow-x: hidden;
@@ -174,24 +174,26 @@ html, body {
 
 /* login and register pages */
 
-.base-page {
+/*.base-page {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1e1e1e, #383838);
+    background: linear-gradient(135deg, #778DA9, #415A77);
     padding: 20px;
     box-sizing: border-box;
-}
+}*/
 
-.base-box {
-    background: #D3D3D3;
+.base-box, .login-page box, .register-page box {
+    background: linear-gradient(135deg, #1e1e1e, #383838);
     padding: 40px;
     border-radius: 20px;
     text-align: center;
-    width: 700px;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.98);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
     color: white;
     display: flex;
@@ -268,16 +270,8 @@ html, body {
 /* footer -- see how to make one */
 footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: red;
+    background-color: #121212;
     padding: 10px 0px;
-    position: relative;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    margin: 0;
-    z-index: 0;
 }
 
 .footer-container {
@@ -289,7 +283,6 @@ footer {
 }
 
 .footer-icon {
-    position: absolute;
     bottom: 10px;
     right: 0px;
 }
