@@ -33,11 +33,11 @@ html, body {
     gap: 10px;
 }
 
-.nav-home logo {
+/*.nav-home logo {
     width: 30px;
     height: 30px;
     filter: invert(1);
-}
+}*/
 
 /* search bar */
 
