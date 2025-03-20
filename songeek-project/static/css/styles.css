@@ -7,7 +7,7 @@ html, body {
     display: block;
     padding: 0;
     flex-direction: column;
-    background-color: #A9A9A9;
+    background-color: #121212;
     font-family: 'Lucida Sans', sans-serif;
     margin: 0;
     overflow-x: hidden;
@@ -15,17 +15,11 @@ html, body {
 
 /* navbar */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #A9A9A9;
     padding: 0px 20px;
-    width: 100%;
-    z-index: 100;
 }
 
 .nav-right {
