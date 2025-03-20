@@ -186,7 +186,7 @@ html, body {
     box-sizing: border-box;
 }*/
 
-.base-box, .login-page box, .register-page box {
+.base-box {
     background: linear-gradient(135deg, #1e1e1e, #383838);
     padding: 40px;
     border-radius: 20px;
