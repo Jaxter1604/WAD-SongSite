@@ -6,32 +6,101 @@
 {% endblock %}
 
 {% block body_block %}
+
+<!-- Top 5 Daily Songs -->
+<h3>Top 5 Daily Songs</h3>
 <ul>
-{% for album in albums %}
-<li>
-    <a href="{% url 'songeek:show_album' album.slug %}">
-        {% if album.cover %}
-            <img src="{{ album.cover.url }}" alt="{{ album.name }}" width="150">
-        {% else %}
-            <img src="{% static 'default_cover.jpg' %}" alt="Default cover" width="150">
-        {% endif %}
-        <h2>{{ album.name }}</h2>
-        <p>By {{ album.artist }}</p>
-    </a>
-</li>
-{% endfor %}
-</ul>   
+    <li style="cursor: pointer;"><span>1.</span> Blinding Lights - The Weeknd
+        <img src="/static/website_images/theweekend.jpg" style="width: 20px; height: 20px;" alt="Blinding Lights">
+    </li>
+    <li style="cursor: pointer;"><span>2.</span> Watermelon Sugar - Harry Styles
+        <img src="/static/website_images/Harry.jpg" style="width: 20px; height: 20px;" alt="Watermelon Sugar">
+    </li>
+    <li style="cursor: pointer;"><span>3.</span> Levitating - Dua Lipa
+        <img src="/static/website_images/dua.jpg" style="width: 20px; height: 20px;" alt="Levitating">
+    </li>
+    <li style="cursor: pointer;"><span>4.</span> Shape of You - Ed Sheeran
+        <img src="/static/website_images/ed.jpg" style="width: 20px; height: 20px;" alt="Shape of You">
+    </li>
+    <li style="cursor: pointer;"><span>5.</span> Save Your Tears - The Weeknd
+        <img src="/static/website_images/theweekend.jpg" style="width: 20px; height: 20px;" alt="Save Your Tears">
+    </li>
+</ul>
+
 <hr>
+
+<!-- Rewind Back -->
+<h3>Rewind Back</h3>
+<div class="song-box-container">
+    {% for song in rewind_songs %}
+        <div class="song-box">
+            <img src="{{ song.cover_image.url }}" alt="{{ song.title }}" style="cursor: pointer;">
+        </div>
+    {% endfor %}
+    <div class="song-box plus-sign">
+        <span> 
+            <img src="/static/website_images/dua.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/justin.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/rihana.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/drake.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <div class="plus-sign" style="cursor: pointer;">+ View More</div>
+        </span>
+    </div>
+</div>
+
+<!-- Discover More -->
+<h3>Discover More</h3>
+<div class="song-box-container">
+    {% for song in discover_songs %}
+        <div class="song-box">
+            <img src="{{ song.cover_image.url }}" alt="{{ song.title }}" style="cursor: pointer;">
+        </div>
+    {% endfor %}
+    <div class="song-box plus-sign">
+        <span> 
+            <img src="/static/website_images/taylor.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/ed.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/song.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/em.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <div class="plus-sign" style="cursor: pointer;">+ View More</div>
+        </span>
+    </div>
+</div>
+
+<!-- Recommendations for Today -->
+<h3>Recommendations for Today</h3>
+<div class="song-box-container">
+    {% for song in recommendations %}
+        <div class="song-box">
+            <img src="{{ song.cover_image.url }}" alt="{{ song.title }}" style="cursor: pointer;">
+        </div>
+    {% endfor %}
+    <div class="song-box plus-sign">
+        <span> 
+            <img src="/static/website_images/harry.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/selena.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/theweekend.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <img src="/static/website_images/justin.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
+            <div class="plus-sign" style="cursor: pointer;">+ View More</div>
+        </span>
+    </div>
+</div>
+
+<hr>
+
+<!-- Existing Section (Do not change this part as per your request) -->
 {% if songs %}
 <ul>
-{% for song in songs %}
-    <li>{{ song.title }} - {{ song.length }} - {{ song.album.artist }}</li>
-{% endfor %}
+    {% for song in songs %}
+        <li style="cursor: pointer;">
+            {{ song.title }} - {{ song.length }} - {{ song.album.artist }}
+        </li>
+    {% endfor %}
 </ul>
 {% endif %}
 <hr>
+
 <ul>
     <li><a href="{% url 'songeek:new_playlist' %}">Create a new Playlist</a></li>
-    <li><a href="{% url 'songeek:profile' %}">Profile</a></li>
-</ul>
+</ul> 
 {% endblock %}

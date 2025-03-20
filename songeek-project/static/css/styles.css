@@ -157,6 +157,7 @@ input:hover {
     background: #333;
 }
 
+/* Footer */
 .footer {
     position: absolute;
     bottom: 20px;
@@ -166,4 +167,60 @@ input:hover {
 .footer img {
     width: 50px;
     height: auto;
+}
+
+/* Top 5 Daily Songs */
+.top-songs-list {
+    list-style-type: none;  /* Removes default bullets */
+    padding-left: 0;
+}
+
+.top-songs-list li {
+    display: flex;
+    align-items: center;  /* Aligns text and image in the same line */
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Numbering */
+.top-songs-list li span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Small image next to the artist's name */
+.top-songs-list li img.song-image {
+    width: 10px;  /* Adjusted size to make it more visible */
+    height: 10px; /* Adjusted size */
+    margin-left: 10px;  /* Space between text and image */
+    border-radius: 50%;  /* Rounded image */
+    vertical-align: middle;  /* Align with text */
+}
+
+
+/* Container for song images */
+.song-box-container {
+    display: flex;
+    flex-direction: row;  /* Arrange items horizontally */
+    gap: 20px;  /* Space between boxes */
+    margin-top: 20px;
+    overflow-x: auto; /* Allows horizontal scrolling */
+}
+
+/* Each individual song box */
+.song-box {
+    width: 120px;
+    height: 120px;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.song-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures images cover the box without distortion */
+    border-radius: 10px;
 }
