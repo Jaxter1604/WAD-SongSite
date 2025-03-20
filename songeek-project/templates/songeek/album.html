@@ -17,7 +17,7 @@
         {% if songs %}
         <ul>
             {% for song in songs %}
-                <li>{{ song.title }} - {{ song.length}}</li>
+                <li><a href="{% url 'songeek:show_song' song.id %}">{{ song.title }}</a> - {{ song.length }}</li>
             {% endfor %}
         </ul>
         {% else %}
@@ -31,7 +31,7 @@
         <h2>Reviews</h2>
         {% if reviews %}
             {% for review in reviews %}
-                <p><strong>{{ review.user.username }}</strong>: ★{{ review.rating }} - {{ review.comment }} - {{ review.timeStamp }}</p>
+                <p><strong>{{ review.user.username }}</strong>: ★ {{ review.rating }} - {{ review.comment }} - {{ review.timeStamp }}</p>
             {% endfor %}
         {% else %}
             <p>No reviews yet. Be the first to review this album!</p>

@@ -52,6 +52,29 @@ def add_song_to_album(request, album_name_slug):
             print(form.errors)
     return render(request, 'songeek/add_song_to_album.html', {'form': form, 'album': album})
 
+def show_song(request, song_id):
+    from django.shortcuts import get_object_or_404
+    
+    song = get_object_or_404(Song, id=song_id)
+    reviews = Review.objects.filter(song=song)
+    
+    form = ReviewForm() if request.user.is_authenticated else None
+
+    if request.method == "POST" and request.user.is_authenticated:
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.song = song
+            review.user = request.user
+            review.save()
+            return redirect('songeek:show_song', song_id=song.id)
+
+    return render(request, 'songeek/song.html', {
+        'song': song,
+        'reviews': reviews,
+        'form': form
+    })
+
 def show_album(request, album_name_slug):
     context_dict = {}
 
