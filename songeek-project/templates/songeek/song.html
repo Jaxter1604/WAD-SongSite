@@ -1,0 +1,40 @@
+{% extends 'songeek/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ song.title }} - {{ song.album.name }}
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ song.title }}</h1>
+    <h2>by {{ song.album.artist }}</h2>
+    <p>Duration: {{ song.length }}</p>
+
+    <h3>Album: <a href="{% url 'songeek:show_album' song.album.slug %}">{{ song.album.name }}</a></h3>
+    <img src="{{ song.album.cover.url }}" alt="{{ song.album.name }}" width="300">
+
+    <h2>Reviews</h2>
+    {% if reviews %}
+        {% for review in reviews %}
+            <p><strong>{{ review.user.username }}</strong>: ★ {{ review.rating }} - {{ review.comment }} - {{ review.timeStamp }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No reviews yet. Be the first to review this song!</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <h3>Leave a Review</h3>
+        <form id='review_form' method="post" action="{% url 'songeek:show_song' song.id %}">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+            <input type="submit" name="submit" value="Leave a Review" />
+        </form>
+    {% endif %}
+
+    <br>
+    <a href="{% url 'songeek:show_album' song.album.slug %}">Back to Album</a>
+{% endblock %}
