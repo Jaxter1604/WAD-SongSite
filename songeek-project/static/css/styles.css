@@ -39,6 +39,53 @@ html, body {
     filter: invert(1);
 }*/
 
+
+/* file input */
+
+.file-upload-wrapper {
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+/* hiding the actual file input */
+.file-upload-wrapper input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+/* custom styled label */
+.file-upload-label {
+    display: inline-block;
+    padding: 12px;
+    background: #A9A9A9;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px #A9A9A9;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-upload-label:hover {
+    background: #383838;
+    border: 2px solid white
+}
+
+.file-upload-label:active {
+    transform: scale(0.98);
+}
+
 /* search bar */
 
 .nav-search {
