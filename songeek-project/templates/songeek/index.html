@@ -7,9 +7,8 @@
 
 {% block body_block %}
 
-
 <h3>Top 5 Daily Songs</h3>
-<ul>
+<ul class="top-songs-list">
     <li style="cursor: pointer;"><span>1.</span> Blinding Lights - The Weeknd
         <img src="/static/website_images/theweekend.jpg" style="width: 20px; height: 20px;" alt="Blinding Lights">
     </li>
@@ -29,64 +28,34 @@
 
 <hr>
 
-
-<h3>Rewind Back</h3>
-<div class="song-box-container">
-    {% for song in rewind_songs %}
-        <div class="song-box">
-            <img src="{{ song.cover_image.url }}" alt="{{ song.title }}" style="cursor: pointer;">
-        </div>
-    {% endfor %}
-    <div class="song-box plus-sign">
-        <span> 
-            <img src="/static/website_images/dua.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/justin.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/rihana.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/drake.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <div class="plus-sign" style="cursor: pointer;">+ View More</div>
-        </span>
-    </div>
+<h3 style="text-align: center;">Rewind Back</h3>
+<div class="image-row">
+    <img src="/static/website_images/harry.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Harry Styles">
+    <img src="/static/website_images/selena.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Selena Gomez">
+    <img src="/static/website_images/theweekend.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="The Weeknd">
+    <img src="/static/website_images/justin.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Justin Bieber">
+    <button class="arrow-btn">➡</button>
 </div>
 
-
-<h3>Discover More</h3>
-<div class="song-box-container">
-    {% for song in discover_songs %}
-        <div class="song-box">
-            <img src="{{ song.cover_image.url }}" alt="{{ song.title }}" style="cursor: pointer;">
-        </div>
-    {% endfor %}
-    <div class="song-box plus-sign">
-        <span> 
-            <img src="/static/website_images/taylor.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/ed.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/song.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/em.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <div class="plus-sign" style="cursor: pointer;">+ View More</div>
-        </span>
-    </div>
+<h3 style="text-align: center;">Discover More</h3>
+<div class="image-row">
+    <img src="/static/website_images/taylor.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Taylor Swift">
+    <img src="/static/website_images/ed.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Ed Sheeran">
+    <img src="/static/website_images/em.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Eminem">
+    <img src="/static/website_images/song.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Song">
+    <button class="arrow-btn">➡</button>
 </div>
 
-<h3>Recommendations for Today</h3>
-<div class="song-box-container">
-    {% for song in recommendations %}
-        <div class="song-box">
-            <img src="{{ song.cover_image.url }}" alt="{{ song.title }}" style="cursor: pointer;">
-        </div>
-    {% endfor %}
-    <div class="song-box plus-sign">
-        <span> 
-            <img src="/static/website_images/harry.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/selena.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/theweekend.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <img src="/static/website_images/justin.jpg" style="width: 80px; height: 80px; cursor: pointer;" alt="Levitating">
-            <div class="plus-sign" style="cursor: pointer;">+ View More</div>
-        </span>
-    </div>
+<h3 style="text-align: center;">Recommendations for Today</h3>
+<div class="image-row">
+    <img src="/static/website_images/rihana.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Rihanna">
+    <img src="/static/website_images/justin.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Justin Bieber">
+    <img src="/static/website_images/taylor.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Taylor Swift">
+    <img src="/static/website_images/selena.jpg" style="width: 100px; height: 100px; cursor: pointer;" alt="Selena Gomez">
+    <button class="arrow-btn">➡</button>
 </div>
 
 <hr>
-
 
 {% if songs %}
 <ul>
@@ -102,4 +71,5 @@
 <ul>
     <li><a href="{% url 'songeek:new_playlist' %}">Create a new Playlist</a></li>
 </ul> 
+
 {% endblock %}

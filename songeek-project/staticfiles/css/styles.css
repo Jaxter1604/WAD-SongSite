@@ -1,80 +1,79 @@
-title {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: aliceblue;
-    text-align: center;
-}
-
 body {
-    display: flex;
-    align-items: center;
-    background-color: #A9A9A9;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 100px;
-}
-
-.login-box {
-    background: #D3D3D3;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px
-}
-
-.logo h1 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/*
-.logo-img, .note-icon {
-    width: 40px;
-    height: auto;
-}
-*/
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #444;
+    font-family: 'Trebuchet MS', sans-serif;
+    background-color: #121212;
     color: white;
-    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.top-songs-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.top-songs-list li {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.top-songs-list li span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.top-songs-list li img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.image-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-row img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #333;
+.arrow-btn {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background-color 0.3s ease;
 }
 
-.signup-link {
-    margin-top: 10px;
-}
-
-.signup-link a {
-    color: black;
-    font-weight: bold;
-    text-decoration: none;
+.arrow-btn:hover {
+    background-color: #666;
 }
