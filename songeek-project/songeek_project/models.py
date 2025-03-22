@@ -10,7 +10,7 @@ class Album(models.Model):
     name = models.CharField(max_length=128)
     artist = models.CharField(max_length=128)
     likes = models.IntegerField(default=0)
-    cover = models.ImageField(upload_to='album_covers', blank = True)
+    cover = models.ImageField(upload_to='album_covers', default="album_covers/default.jpeg")
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):

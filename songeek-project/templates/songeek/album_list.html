@@ -5,9 +5,11 @@
 <ul>
     {% for album in albums %}
     <li>
+        <a href="{% url 'songeek:show_album' album.slug %}">
         <img src="{{ album.cover.url }}" alt="{{ album.title }}" width="150">
         <h2>{{ album.title }}</h2>
         <p>By {{ album.artist }}</p>
+        </a>
     </li>  
     {% endfor %}
 </ul>   
