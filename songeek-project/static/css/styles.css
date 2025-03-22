@@ -44,11 +44,13 @@ html, body {
 
 .file-upload-wrapper {
     position: relative;
-    display: inline-block;
+    display: block;
     align-items: center;
+    justify-content: center;
     width: 100%;
     max-width: 450px;
     text-align: center;
+    margin: 10px auto;
 }
 
 /* hiding the actual file input */
@@ -58,15 +60,16 @@ html, body {
     height: 100%;
     opacity: 0;
     cursor: pointer;
-    align-items: center;
-    justify-content: center;
+    pointer-events: none;
 }
 
 /* custom styled label */
 .file-upload-label {
-    display: inline-block;
+    display: block;
+    width: 100%;
+    max-width: 450px;
     padding: 12px;
-    background: #A9A9A9;
+    background: #383838;
     color: white;
     font-size: 14px;
     font-weight: bold;
@@ -75,11 +78,12 @@ html, body {
     border: 2px #A9A9A9;
     align-items: center;
     justify-content: center;
+    pointer-events: auto;
 }
 
 .file-upload-label:hover {
     background: #383838;
-    border: 2px solid white
+    border: 2px solid white;
 }
 
 .file-upload-label:active {
@@ -119,7 +123,7 @@ html, body {
     cursor: pointer;
 }
 
-/* login and signup buttons */
+/*navbar */
 
 .nav-auth {
     display: flex;
@@ -244,7 +248,7 @@ html, body {
 }*/
 
 .base-box {
-    background: linear-gradient(135deg, #1e1e1e, #383838);
+    background: linear-gradient(180deg, #383838, #1e1e1e);
     padding: 40px;
     border-radius: 20px;
     text-align: center;
@@ -268,9 +272,15 @@ html, body {
     gap: 15px;
 }
 
-.base-box form button {
+.base-box button {
     display: block;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    max-width: 450px;
+    margin: 10px auto;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .logo img {
@@ -294,7 +304,7 @@ html, body {
     padding: 12px;
     border: 2px solid #A9A9A9;
     border-radius: 7px;
-    background-color: #D3D3D3;
+    background: #383838;
     font-size: 14px;
     color: white;
 }
@@ -308,9 +318,10 @@ html, body {
     border: 2px solid white;
 }
 
-/* buttons */
+/* login / sign up buttons */
 .base-box button, .signup-link a {
     width: 100%;
+    max-width: 450px;
     padding: 12px;
     background-color: #444;
     color: white;
