@@ -29,7 +29,7 @@
         {% if user.is_authenticated %}
         <div class="profile-icon">
             <a href="{% url 'songeek:profile' %}">
-                <img src="{% static 'images/profile-icon.png' %}" alt="Profile" class="profile-icon">
+                <img src="{{ user.username.picture.url }}" alt="Profile" class="profile-icon">
             </a>
         </div>
         {% else %}
