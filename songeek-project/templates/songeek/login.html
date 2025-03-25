@@ -5,16 +5,20 @@
     Login
 {% endblock %}
 
+{% block body_class %}base-page login-page{% endblock %}
+
 {% block body_block %}
-    <div class="login-container">
-        <div class="login-box">
+    <div class="base-page">
+        <div class="base-box">
             <div class="logo">
-                <img src="{% static 'website_images/headphones.png' %}" alt="Headphones">
+                <a href="{% url 'songeek:index' %}">
+                    <img src="{% static 'website_images/headphones.png' %}" class="logio-img" alt="Headphones">
+                </a>
             </div>
 
             <div class="title-container">
                 <h1> Log in to Songeek </h1>
-                <img src="{% static 'website_images/notes.jpg' %}" alt="Music notes">
+                <!--<img src="{% static 'website_images/notes.jpg' %}" alt="Music notes">-->
             </div>
 
             <form id="login_form" method="post" action="{% url 'songeek:login' %}">
@@ -25,9 +29,7 @@
 
                 <label>Password</label>
                 <div class="password-container">
-                    <input type="password" name="password" id="password" placeholder="Password" required>
-                    <img src="{% static 'website_images/eye.jpg' %}" class="toggle-password" onclick="togglePassword()">
-                </div>
+                    <input type="password" name="password" id="password" placeholder="Password" required>                </div>
 
                 <button type="submit">Log In</button>
 
@@ -36,20 +38,5 @@
                 </div>
             </form>
         </div>
-
-        <div class="footer">
-            <img src="{% static 'website_images/headphones_footer.png' %}" alt="Footer">
-        </div>
     </div>
 {% endblock %}
-
-<script>
-function togglePassword() {
-    var passwordField = document.getElementById("password");
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-    } else {
-        passwordField.type = "password";
-    }
-}
-</script>

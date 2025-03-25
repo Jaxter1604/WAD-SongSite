@@ -11,13 +11,19 @@ from songeek_project.models import Album, Song, Playlist, Review
 def index(request):
 
     song_list = Song.objects.order_by('-listens')[:5]
-    albums = Album.objects.all()
+    albums = Album.objects.all()[:8]
+    
+    user_playlists = None
+    if request.user.is_authenticated:
+        user_playlists = Playlist.objects.filter(user=request.user)[:4]
 
-    context_dict = {}
-    context_dict['songs'] = song_list
-    context_dict['albums'] = albums
+    context_dict = {
+        'songs': song_list,
+        'albums': albums,
+        'user_playlists': user_playlists,
+    }
 
-    return render(request, 'songeek/index.html', context = context_dict)
+    return render(request, 'songeek/index.html', context=context_dict)
 
 @login_required
 def add_album(request):
@@ -132,6 +138,8 @@ def register(request):
                 profile.picture = request.FILES['picture']
             profile.save()
             registered = True
+            login(request, user)
+            #return redirect('homepage')
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -156,12 +164,14 @@ def user_login(request):
             else:
                 return HttpResponse("Your Songeek account is disabled.")
         else:
-            print(f"Invlaid login details: {username}, {password}")
-            return HttpResponse("Invlaid login details supplied.")
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
 
     else:
         return render(request, 'songeek/login.html')
 
+#def homepage(request):
+#    return render(request, 'homepage.html')
 @login_required
 def user_logout(request):
     logout(request)
@@ -171,6 +181,20 @@ def user_logout(request):
 def new_playlist(request):
     form = PlaylistForm()
 
+    if request.method == 'POST':
+        form = PlaylistForm(request.POST, request.FILES)
+        if form.is_valid():
+            playlist = form.save(commit=False)
+            playlist.user = request.user
+            playlist.save()
+            return redirect('/songeek/')  
+        else:
+            print(form.errors)  
+
+    return render(request, 'songeek/new_playlist.html', {'form': form})
+
+
+def add_song_to_playlist(request):
     if request.method == 'POST':
         form = PlaylistForm(request.POST, request.FILES)
         if form.is_valid():

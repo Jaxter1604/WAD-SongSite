@@ -6,8 +6,12 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Create a new Playlist</h1>
-    <div>
+<div class="base-page">
+    <div class="base-box">
+        <div class="title-container">
+            <h1>Create a new Playlist</h1>
+        <div>
+            
         <form id="playlist_form" method="post" action="{% url 'songeek:new_playlist' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
@@ -16,9 +20,19 @@
             {% for field in form.visible_fields %}
                 {{ field.errors }}
                 {{ field.help_text }}
-                {{ field }}
-            {% endfor %}
-            <input type="submit" name="submit" value="Create New Playlist" />
-        </form>
+
+                {% if field.field.widget.input_type == "file" %}
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="{{ field.id_for_label }}" name="{{ field.html_name }}">
+                            <label for="{{ field.id_for_label }}" class="file-upload-label">Upload Album Cover</label>
+                        </div>
+                    {% else %}
+                        {{ field }}
+                    {% endif %}
+                {% endfor %}
+                <button type="submit">Create New Playlist</button>
+            </form>
+        </div>
     </div>
+</div>
 {% endblock %}

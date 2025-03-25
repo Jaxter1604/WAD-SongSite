@@ -5,31 +5,107 @@
     Homepage
 {% endblock %}
 
+{% block body_class %}navbar nav-search base-page base-box index-page{% endblock %}
+
 {% block body_block %}
-<ul>
-{% for album in albums %}
 
-<li>
-    <a href="{% url 'songeek:show_album' album.slug %}">
-    <img src="{{ album.cover.url }}" alt="{{ album.name }}" width="150">
-    <h2>{{ album.name }}</h2>
-    <p>By {{ album.artist }}</p>
-    </a>
-</li>
+<!-- navigation bar -->
+{% comment %} <header class="navbar">
+    <div class="nav-left">
+        <a href="{% url 'songeek:index' %}">
+            <!--<div class="nav-home">
+                <img src="{% static 'website_images/headphones.png' %}" alt="Songeek Logo" class="logo">
+                </a>
+            </div>-->
+        </div>
 
-{% endfor %}
-</ul>   
-</hr>
-{% if songs %}
-<ul>
-{% for song in songs %}
-    <li>{{ song.title }} - {{ song.length }} - {{ song.album.artist }}</li>
-{% endfor %}
-</ul>
-{% endif %}
-</hr>
-<ul>
-    <li><a href="{% url 'songeek:new_playlist' %}">Create a new Playlist</a></li>
-    <li><a href="{% url 'songeek:profile' %}">Profile</a></li>
-</ul>
+    <div class="nav-center">
+        <form action="{% url 'songeek:search_results' %}" method="GET">
+            <input type="text" name="q" placeholder="Search albums or songs..." class="search-bar">
+        </form>
+    </div>
+
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+        <div class="profile-icon">
+            <a href="{% url 'songeek:profile' %}">
+                <img src="{{ user.userprofile.picture.url }}" alt="Profile" class="profile-icon">
+            </a>
+        </div>
+        {% else %}
+            <a href="{% url 'songeek:login' %}" class="nav-button">Login</a>
+            <a href="{% url 'songeek:register' %}" class="nav-button">Sign Up</a>
+        {% endif %}
+    </div>
+</header> {% endcomment %}
+
+
+<div class="base-box">
+        <!-- top 5 daily songs -->
+        <div class="top-songs">
+            <h2>Top 5 Daily Songs</h2>
+            <ul>
+                {% for song in top_songs %} <!-- not set up and check variable calling-->
+                <li class="song-item">
+                    <span class="song-rank">{{ forloop.counter }}</span>
+                    <img src="{{ song.album.cover.url }}" alt="{{ song.album.name }}" class="album-cover">
+                    <div class="song-info">
+                        <span class="song-title">{{ song.title }}</span>
+                        <span class="song-artist">{{ song.artist }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        <!-- image placeholder -->
+        <div class="visualizer">
+            <img src="{% static 'images/visualizer.png' %}" alt="Music Visualizer">
+        </div>
+
+        <!-- playlist and album sections -->
+        <div class="song-sections">
+
+            <!-- rewind back -->
+        {% if user.is_authenticated and user_playlists %}
+        <section class="playlist-section">
+            <div class="image-cards">
+                {% for playlist in user_playlists %}
+                <div class="card">
+                    <img src="{{ playlist.cover.url }}" alt="{{ playlist.name }}">
+                    <p>{{ playlist.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+            <!-- discover more -->
+            <div class="section">
+                <h3>Discover more</h3>
+                <div class="image-cards">
+                    {% for album in albums %}
+                    <div class="card">
+                        <img src="{{ album.cover.url }}" alt="{{ album.name }}">
+                        <p>{{ album.name }} - {{ album.artist }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- recommendations for today -->
+            <div class="section">
+                <h3>Recommendations for today</h3>
+                <div class="image-cards">
+                    {% for album in recommended_albums %}
+                    <div class="card">
+                        <img src="{{ album.cover.url }}" alt="{{ album.name }}">
+                        <p>{{ album.name }} - {{ album.artist }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+</div>
 {% endblock %}

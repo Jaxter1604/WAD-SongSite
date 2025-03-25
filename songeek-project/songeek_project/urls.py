@@ -11,6 +11,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('search/', views.search_results, name='search_results'),
     path('add_album/', views.add_album, name='add_album'),
+    #path('homepage/', views.homepage, name='homepage'),
     path('album_list/', views.album_list, name='album_list'),
     path('album/<slug:album_name_slug>/', views.show_album, name='show_album'),
     path('song/<int:song_id>/', views.show_song, name='show_song'),

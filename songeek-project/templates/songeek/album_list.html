@@ -1,13 +1,17 @@
 {% extends 'songeek/base.html' %}
 {% load staticfiles %}
 
+{% block body_class %}navbar nav-search base-page base-box index-page{% endblock %}
+
 {% block body_block %}
 <ul>
     {% for album in albums %}
     <li>
+        <a href="{% url 'songeek:show_album' album.slug %}">
         <img src="{{ album.cover.url }}" alt="{{ album.title }}" width="150">
         <h2>{{ album.title }}</h2>
         <p>By {{ album.artist }}</p>
+        </a>
     </li>  
     {% endfor %}
 </ul>   
