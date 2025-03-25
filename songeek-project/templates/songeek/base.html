@@ -15,10 +15,33 @@
     </head>
     <body class="{% block body_class %}{% endblock %}">
         <div>
-            <!--<form action="{% url 'songeek:search_results' %}" method="GET">
-                <input type="text" name="q" placeholder="Search albums or songs..." required>
-                <button type="submit">Search</button>
-            </form>-->
+            <header class="navbar">
+                <div class="nav-left">
+                    <a href="{% url 'songeek:index' %}"> HomePage
+                        {% comment %} <div class="nav-home">
+                            <img src="{% static 'website_images/headphones.png' %}" alt="Songeek Logo" class="logo"> {% endcomment %}
+                        </a>
+                    </div>
+            
+                <div class="nav-center">
+                    <form action="{% url 'songeek:search_results' %}" method="GET">
+                        <input type="text" name="q" placeholder="Search albums or songs..." class="search-bar">
+                    </form>
+                </div>
+            
+                <div class="nav-right">
+                    {% if user.is_authenticated %}
+                    <div class="profile-icon">
+                        <a href="{% url 'songeek:profile' %}">
+                            <img src="{{ user.userprofile.picture.url }}" alt="Profile" class="profile-icon">
+                        </a>
+                    </div>
+                    {% else %}
+                        <a href="{% url 'songeek:login' %}" class="nav-button">Login</a>
+                        <a href="{% url 'songeek:register' %}" class="nav-button">Sign Up</a>
+                    {% endif %}
+                </div>
+            </header>
         </div>
         <div>
             {% block body_block %}

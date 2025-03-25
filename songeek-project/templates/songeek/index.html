@@ -10,7 +10,7 @@
 {% block body_block %}
 
 <!-- navigation bar -->
-<header class="navbar">
+{% comment %} <header class="navbar">
     <div class="nav-left">
         <a href="{% url 'songeek:index' %}">
             <!--<div class="nav-home">
@@ -29,7 +29,7 @@
         {% if user.is_authenticated %}
         <div class="profile-icon">
             <a href="{% url 'songeek:profile' %}">
-                <img src="{{ user.username.picture.url }}" alt="Profile" class="profile-icon">
+                <img src="{{ user.userprofile.picture.url }}" alt="Profile" class="profile-icon">
             </a>
         </div>
         {% else %}
@@ -37,7 +37,7 @@
             <a href="{% url 'songeek:register' %}" class="nav-button">Sign Up</a>
         {% endif %}
     </div>
-</header>
+</header> {% endcomment %}
 
 
 <div class="base-box">
