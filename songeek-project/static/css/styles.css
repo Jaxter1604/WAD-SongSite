@@ -235,7 +235,7 @@ html, body {
 
 /* login and register pages */
 
-.base-page {
+/*.base-page {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -245,7 +245,7 @@ html, body {
     background: linear-gradient(135deg, #778DA9, #415A77);
     padding: 20px;
     box-sizing: border-box;
-}
+}*/
 
 .base-box {
     background: linear-gradient(180deg, #383838, #1e1e1e);
