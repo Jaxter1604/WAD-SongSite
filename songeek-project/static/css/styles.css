@@ -3,7 +3,7 @@
 /* general CSS */
 
 html, body {
-    /* height: 100%; */
+    height: 100%;
     display: block;
     padding: 0;
     flex-direction: column;
@@ -33,11 +33,11 @@ html, body {
     gap: 10px;
 }
 
-/*.nav-home logo {
+.nav-home logo {
     width: 30px;
     height: 30px;
     filter: invert(1);
-}*/
+}
 
 
 /* file input */
@@ -235,7 +235,7 @@ html, body {
 
 /* login and register pages */
 
-/*.base-page {
+.base-page {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -245,7 +245,7 @@ html, body {
     background: linear-gradient(135deg, #778DA9, #415A77);
     padding: 20px;
     box-sizing: border-box;
-}*/
+}
 
 .base-box {
     background: linear-gradient(180deg, #383838, #1e1e1e);
