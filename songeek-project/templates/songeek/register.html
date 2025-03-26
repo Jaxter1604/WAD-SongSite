@@ -5,18 +5,46 @@
     Register
 {% endblock %}
 
-{% block body_block %}
-    <h1>Register for Songeek</h1>
-    {% if registered %}
-        <strong>You're now a listener!</strong>
-    {% else %}
-        <strong>Register here!</strong><br />
-        <form id="user_form" method="post" action="{% url 'songeek:register' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
+{% block body_class %}base-page register-page{% endblock %}
 
-            <input type="submit" name="submit" value="Register" />
-        </form>
-    {% endif %}
+{% block body_block %}
+<div class="base-box">
+    <div class="logo">
+        <a href="{% url 'songeek:index' %}">
+            <img src="{% static 'website_images/headphones.png' %}" class="logoimg" alt="Headphones">
+        </a>
+    </div>
+
+            <div class="title-container">
+                <h1>Sign up for Songeek</h1>
+            </div>
+
+        {% if registered %}
+            <strong>You're now a listener!</strong>
+        {% else %}
+            <form id="user_form" method="post" action="{% url 'songeek:register' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                    <label for="id_username">Username</label>
+                    {{ user_form.username }}
+
+                    <label for="id_email">Email</label>
+                    {{ user_form.email }}
+
+                    <label for="id_password">Password</label>
+                    {{ user_form.password }}
+
+                    <label for="id_picture">Profile Picture</label>
+                    {{profile_form.picture}}
+
+                <button type="submit">Sign Up</button>
+            </form>
+
+            <div class="signup-link">
+            <p>Already have an account? <a href="{% url 'songeek:login' %}" class="signup-link">Log in</a>
+                </div>
+            </p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

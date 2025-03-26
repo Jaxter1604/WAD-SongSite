@@ -10,7 +10,7 @@ class Album(models.Model):
     name = models.CharField(max_length=128)
     artist = models.CharField(max_length=128)
     likes = models.IntegerField(default=0)
-    cover = models.ImageField(upload_to='album_covers', blank = True)
+    cover = models.ImageField(upload_to='album_covers', default="album_covers/default.jpeg")
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -44,7 +44,7 @@ class Playlist(models.Model):
     name = models.CharField(max_length=128)
     cover = models.ImageField(upload_to='playlist_covers', blank = True)
     songs = models.ManyToManyField(Song, related_name='playlists', blank = True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -55,12 +55,12 @@ class Playlist(models.Model):
         app_label = 'songeek_project'
     
     def __str__(self):
-        return str(self.title)
+        return str(self.name)
 
 #basic user model from rango
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True, default='profile_images/profile_photo.jpg')
 
     def __str__(self):
         return self.user.username

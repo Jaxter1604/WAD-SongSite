@@ -7,17 +7,27 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm, PlaylistForm, SongToPlaylistForm, ReviewForm
 from songeek_project.models import Album, Song, Playlist, Review
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
+import json
 
 def index(request):
 
     song_list = Song.objects.order_by('-listens')[:5]
-    albums = Album.objects.all()
+    albums = Album.objects.all()[:8]
+    
+    user_playlists = None
+    if request.user.is_authenticated:
+        user_playlists = Playlist.objects.filter(user=request.user)[:4]
 
-    context_dict = {}
-    context_dict['songs'] = song_list
-    context_dict['albums'] = albums
+    context_dict = {
+        'songs': song_list,
+        'albums': albums,
+        'user_playlists': user_playlists,
+    }
 
-    return render(request, 'songeek/index.html', context = context_dict)
+    return render(request, 'songeek/index.html', context=context_dict)
 
 @login_required
 def add_album(request):
@@ -132,6 +142,8 @@ def register(request):
                 profile.picture = request.FILES['picture']
             profile.save()
             registered = True
+            login(request, user)
+            #return redirect('homepage')
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -156,12 +168,14 @@ def user_login(request):
             else:
                 return HttpResponse("Your Songeek account is disabled.")
         else:
-            print(f"Invlaid login details: {username}, {password}")
-            return HttpResponse("Invlaid login details supplied.")
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
 
     else:
         return render(request, 'songeek/login.html')
 
+#def homepage(request):
+#    return render(request, 'homepage.html')
 @login_required
 def user_logout(request):
     logout(request)
@@ -171,6 +185,20 @@ def user_logout(request):
 def new_playlist(request):
     form = PlaylistForm()
 
+    if request.method == 'POST':
+        form = PlaylistForm(request.POST, request.FILES)
+        if form.is_valid():
+            playlist = form.save(commit=False)
+            playlist.user = request.user
+            playlist.save()
+            return redirect('/songeek/')  
+        else:
+            print(form.errors)  
+
+    return render(request, 'songeek/new_playlist.html', {'form': form})
+
+
+def add_song_to_playlist(request):
     if request.method == 'POST':
         form = PlaylistForm(request.POST, request.FILES)
         if form.is_valid():
@@ -270,3 +298,30 @@ def search_results(request):
     }
 
     return render(request, 'songeek/search_results.html', context=context_dict)
+    
+@login_required
+@csrf_exempt
+def add_review(request, album_slug):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            album = get_object_or_404(Album, slug=album_slug)
+            rating = int(data.get("rating", 0))
+            comment = data.get("comment", "").strip()
+
+            if rating < 1 or rating > 5 or not comment:
+                return JsonResponse({"success": False, "error": "Invalid rating or comment."})
+
+            review = Review.objects.create(album=album, user=request.user, rating=rating, comment=comment)
+
+            return JsonResponse({
+                "success": True,
+                "user": request.user.username,
+                "rating": review.rating,
+                "comment": review.comment,
+                "timestamp": review.timeStamp.strftime("%Y-%m-%d %H:%M"),
+            })
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+    
+    return JsonResponse({"success": False, "error": "Invalid request."})
