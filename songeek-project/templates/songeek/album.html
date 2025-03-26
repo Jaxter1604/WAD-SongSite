@@ -62,7 +62,7 @@
                     let rating = formData.get("rating");
                     let comment = formData.get("comment");
         
-                    fetch("{% url 'songeek:add_review' album.slug %}", {  // Use the correct review submission URL
+                    fetch("{% url 'songeek:add_review' album.slug %}", {
                         method: "POST",
                         headers: {
                             "X-CSRFToken": "{{ csrf_token }}",
@@ -76,12 +76,10 @@
                             let reviewContainer = document.getElementById("reviews");
                             let noReviewsMessage = document.getElementById("no_reviews");
         
-                            // Remove "No reviews yet" message if it exists
                             if (noReviewsMessage) {
                                 noReviewsMessage.remove();
                             }
-        
-                            // Create a new review element and add it at the top
+
                             let newReview = document.createElement("p");
                             newReview.innerHTML = `<strong>${data.user}</strong>: ★ ${data.rating} - ${data.comment} - ${data.timestamp}`;
                             reviewContainer.prepend(newReview);
