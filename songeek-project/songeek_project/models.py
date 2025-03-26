@@ -44,7 +44,7 @@ class Playlist(models.Model):
     name = models.CharField(max_length=128)
     cover = models.ImageField(upload_to='playlist_covers', blank = True)
     songs = models.ManyToManyField(Song, related_name='playlists', blank = True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -55,7 +55,7 @@ class Playlist(models.Model):
         app_label = 'songeek_project'
     
     def __str__(self):
-        return str(self.title)
+        return str(self.name)
 
 #basic user model from rango
 class UserProfile(models.Model):
