@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let formData = new FormData(this);
             let rating = formData.get("rating");
             let comment = formData.get("comment");
-            let url = this.action; // Use the form's action attribute for the URL
+            let url = this.action;
 
             fetch(url, {
                 method: "POST",
