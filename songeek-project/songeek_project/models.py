@@ -74,6 +74,5 @@ class Review(models.Model):
     timeStamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = (('user', 'album'), ('user', 'song'))
         app_label = 'songeek_project'
     
