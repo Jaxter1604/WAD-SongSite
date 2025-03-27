@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 from django.utils.text import slugify
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm, PlaylistForm, SongToPlaylistForm, ReviewForm
@@ -157,9 +157,25 @@ def register(request):
 
 def user_login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        identifier = request.POST.get('username')  # Username or Email Address
         password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
+        user = None
+
+        User = get_user_model()
+
+        try:
+            # First, try to search by username.
+            user_obj = User.objects.get(username=identifier)
+        except User.DoesNotExist:
+            try:
+                # If it is not the username, try to search by email address.
+                user_obj = User.objects.get(email=identifier)
+            except User.DoesNotExist:
+                user_obj = None
+
+        if user_obj:
+            # Here, still, a username is required for authentication.
+            user = authenticate(username=user_obj.username, password=password)
 
         if user:
             if user.is_active:
@@ -168,7 +184,7 @@ def user_login(request):
             else:
                 return HttpResponse("Your Songeek account is disabled.")
         else:
-            print(f"Invalid login details: {username}, {password}")
+            print(f"Invalid login details: {identifier}, {password}")
             return HttpResponse("Invalid login details supplied.")
 
     else:

@@ -1,8 +1,9 @@
 {% extends 'songeek/base.html' %}
 
 {% block body_block %}
+<div class="title-container">
     <h2>Search Results for "{{ query }}"</h2>
-
+</div>
     {% if albums or songs %}
         {% if albums %}
             <h3>Albums</h3>
