@@ -6,19 +6,23 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>Add a Song to {{ album.name }}</h1>
-    <div>
-        <form id="song_form" method="post" action="{% url 'songeek:add_song_to_album' album.slug %}">
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field }}
-            {% endfor %}
-            <input type="submit" name="submit" value="Add Song" />
-        </form>
-    </div>
+<div class="base-page">
+    <div class="base-box">
+        <div class="title-container">
+            <h1>Add a Song to {{ album.name }}</h1>
+        <div>
+                <form id="song_form" method="post" action="{% url 'songeek:add_song_to_album' album.slug %}">
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                        {{ field.errors }}
+                        {{ field.help_text }}
+                        {{ field }}
+                    {% endfor %}
+                    <button type="submit">Add Song</button>
+                </form>
+            </div>
+        </div>
 {% endblock %}
