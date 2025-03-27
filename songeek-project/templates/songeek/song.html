@@ -14,26 +14,70 @@
     <img src="{{ song.album.cover.url }}" alt="{{ song.album.name }}" width="300">
 
     <h2>Reviews</h2>
-    {% if reviews %}
-        {% for review in reviews %}
-            <p><strong>{{ review.user.username }}</strong>: ★ {{ review.rating }} - {{ review.comment }} - {{ review.timeStamp }}</p>
-        {% endfor %}
-    {% else %}
-        <p>No reviews yet. Be the first to review this song!</p>
-    {% endif %}
+        <div id="reviews">
+            {% if reviews %}
+                {% for review in reviews %}
+                    <p><strong>{{ review.user.username }}</strong>: ★ {{ review.rating }} - {{ review.comment }} - {{ review.timeStamp }}</p>
+                {% endfor %}
+            {% else %}
+                <p id="no_reviews">No reviews yet. Be the first to review this album!</p>
+            {% endif %}
+        </div>
 
     {% if user.is_authenticated %}
-        <h3>Leave a Review</h3>
-        <form id='review_form' method="post" action="{% url 'songeek:show_song' song.id %}">
-            {% csrf_token %}
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field }}
-            {% endfor %}
-            <input type="submit" name="submit" value="Leave a Review" />
-        </form>
-    {% endif %}
+    <h3>Leave a Review</h3>
+    <form id="review_form">
+        {% csrf_token %}
+        <label for="rating">Rating (1-5):</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+        
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" required></textarea>
+        
+        <input type="submit" value="Leave a Review">
+    </form>
+{% endif %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("review_form").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let formData = new FormData(this);
+            let rating = formData.get("rating");
+            let comment = formData.get("comment");
+
+            fetch("{% url 'songeek:song_add_review' song.id %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ rating, comment }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let reviewContainer = document.getElementById("reviews");
+                    let noReviewsMessage = document.getElementById("no_reviews");
+
+                    if (noReviewsMessage) {
+                        noReviewsMessage.remove();
+                    }
+
+                    let newReview = document.createElement("p");
+                    newReview.innerHTML = `<strong>${data.user}</strong>: ★ ${data.rating} - ${data.comment} - ${data.timestamp}`;
+                    reviewContainer.prepend(newReview);
+
+                    document.getElementById("review_form").reset();
+                } else {
+                    alert("Error submitting review: " + data.error);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+</script>
 
     <br>
     <a href="{% url 'songeek:show_album' song.album.slug %}">Back to Album</a>

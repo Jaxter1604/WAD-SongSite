@@ -325,3 +325,30 @@ def add_review(request, album_slug):
             return JsonResponse({"success": False, "error": str(e)})
     
     return JsonResponse({"success": False, "error": "Invalid request."})
+
+@login_required
+@csrf_exempt
+def song_add_review(request, song_id):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            song = get_object_or_404(Song, id=song_id)
+            rating = int(data.get("rating", 0))
+            comment = data.get("comment", "").strip()
+
+            if rating < 1 or rating > 5 or not comment:
+                return JsonResponse({"success": False, "error": "Invalid rating or comment."})
+
+            review = Review.objects.create(song=song, user=request.user, rating=rating, comment=comment)
+
+            return JsonResponse({
+                "success": True,
+                "user": request.user.username,
+                "rating": review.rating,
+                "comment": review.comment,
+                "timestamp": review.timeStamp.strftime("%Y-%m-%d %H:%M"),
+            })
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+    
+    return JsonResponse({"success": False, "error": "Invalid request."})
