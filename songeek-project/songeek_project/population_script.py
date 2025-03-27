@@ -80,7 +80,7 @@ def populate():
 
     for review_data in reviews_data:
         user = review_data['user']
-        album = review_data.get('album')  # Use .get() to avoid KeyError
+        album = review_data.get('album')
         song = review_data.get('song')
 
         if album:
