@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from songeek_project.forms import AlbumForm, SongForm, UserForm, UserProfileForm, PlaylistForm, SongToPlaylistForm, ReviewForm
 from songeek_project.models import Album, Song, Playlist, Review
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
+import json
 
 def index(request):
 
@@ -294,3 +298,57 @@ def search_results(request):
     }
 
     return render(request, 'songeek/search_results.html', context=context_dict)
+    
+@login_required
+@csrf_exempt
+def add_review(request, album_slug):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            album = get_object_or_404(Album, slug=album_slug)
+            rating = int(data.get("rating", 0))
+            comment = data.get("comment", "").strip()
+
+            if rating < 1 or rating > 5 or not comment:
+                return JsonResponse({"success": False, "error": "Invalid rating or comment."})
+
+            review = Review.objects.create(album=album, user=request.user, rating=rating, comment=comment)
+
+            return JsonResponse({
+                "success": True,
+                "user": request.user.username,
+                "rating": review.rating,
+                "comment": review.comment,
+                "timestamp": review.timeStamp.strftime("%Y-%m-%d %H:%M"),
+            })
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+    
+    return JsonResponse({"success": False, "error": "Invalid request."})
+
+@login_required
+@csrf_exempt
+def song_add_review(request, song_id):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            song = get_object_or_404(Song, id=song_id)
+            rating = int(data.get("rating", 0))
+            comment = data.get("comment", "").strip()
+
+            if rating < 1 or rating > 5 or not comment:
+                return JsonResponse({"success": False, "error": "Invalid rating or comment."})
+
+            review = Review.objects.create(song=song, user=request.user, rating=rating, comment=comment)
+
+            return JsonResponse({
+                "success": True,
+                "user": request.user.username,
+                "rating": review.rating,
+                "comment": review.comment,
+                "timestamp": review.timeStamp.strftime("%Y-%m-%d %H:%M"),
+            })
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+    
+    return JsonResponse({"success": False, "error": "Invalid request."})

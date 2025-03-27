@@ -73,26 +73,33 @@ def populate():
     # Add Review 
     reviews_data = [
         {'user': User.objects.first(), 'album': Album.objects.first(), 'rating': 5, 'comment': 'Awesome!'},
-        {'user': User.objects.last(), 'album': Album.objects.last(), 'rating': 4, 'comment': 'Great album!'}
+        {'user': User.objects.last(), 'album': Album.objects.last(), 'rating': 4, 'comment': 'Great album!'},
+        {'user': User.objects.first(), 'song': Song.objects.first(), 'rating': 1, 'comment': "Didn't like this one."},
+        {'user': User.objects.last(), 'song': Song.objects.last(), 'rating': 3, 'comment': "It was alright."}
     ]
 
     for review_data in reviews_data:
         user = review_data['user']
-        album = review_data['album']
+        album = review_data.get('album')
+        song = review_data.get('song')
 
-        if user and album:
+        if album:
             review, created = Review.objects.update_or_create(
                 user=user,
                 album=album,
                 defaults={'rating': review_data['rating'], 'comment': review_data['comment']}
             )
+        elif song:
+            review, created = Review.objects.update_or_create(
+                user=user,
+                song=song,
+                defaults={'rating': review_data['rating'], 'comment': review_data['comment']}
+            )
 
-            if created:
-                print(f"Added review: {review}")
-            else:
-                print(f"Updated existing review: {review}")
+        if created:
+            print(f"Added review: {review}")
         else:
-            print("Skipping review, missing user or album.")
+            print(f"Updated existing review: {review}")
 
     print("Database filling is completed!")
 
