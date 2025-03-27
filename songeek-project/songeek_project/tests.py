@@ -89,7 +89,36 @@ class SongeekTests(TestCase):
 
         # Confirm that the comment is written into the database
         self.assertTrue(Review.objects.filter(album=self.album, user=self.user, comment="Amazing Album!").exists())
-    
+
+    def test_add_song_to_album_view(self):
+        response = self.client.post(reverse('songeek:add_song_to_album', kwargs={'album_name_slug': self.album.slug}), {
+            'title': 'New Test Song',
+            'length': '00:04:00',
+            'listens': 0,
+        })
+        self.assertEqual(response.status_code, 302)  # should redirect after success
+        self.assertTrue(Song.objects.filter(title='New Test Song', album=self.album).exists())
+
+    def test_create_playlist_view(self):
+        with open('media/album_covers/default.jpeg', 'rb') as img:
+            response = self.client.post(reverse('songeek:new_playlist'), {
+                'name': 'My Playlist',
+                'cover': img,
+            })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(Playlist.objects.filter(name='My Playlist', user=self.user).exists())
+
+    def test_profile_view(self):
+        response = self.client.get(reverse('songeek:profile'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Your Playlists")
+
+    def test_search_functionality(self):
+        response = self.client.get(reverse('songeek:search_results') + '?q=Test')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.album.name)
+
     def tearDown(self):
         folder = os.path.join(settings.MEDIA_ROOT, 'album_covers')
         for filename in os.listdir(folder):
