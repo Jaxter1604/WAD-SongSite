@@ -61,7 +61,7 @@
 
         <!-- image placeholder -->
         <div class="visualizer">
-            <img src="{% static 'website_images/visualizer.png' %}" alt="Music Visualizer">
+            <img src="{% static 'website_images/visualizer.jpg' %}" alt="Music Visualizer">
         </div>
 
         <!-- playlist and album sections -->
@@ -73,7 +73,11 @@
             <div class="image-cards">
                 {% for playlist in user_playlists %}
                 <div class="card">
-                    <img src="{{ playlist.cover.url }}" alt="{{ playlist.name }}">
+                    {% if playlist.cover %}
+                        <img src="{{ playlist.cover.url }}" alt="{{ playlist.name }}" width="200">
+                    {% else %}
+                        <p>No cover image</p>
+                    {% endif %}
                     <p>{{ playlist.name }}</p>
                 </div>
                 {% endfor %}
