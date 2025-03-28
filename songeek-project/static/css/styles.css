@@ -397,3 +397,7 @@ footer {
         margin: 20px;
     }
 }
+
+a:visited {
+    color: #CCCCFF; /* Light purple for better visibility on black */
+}

@@ -14,7 +14,7 @@ import json
 
 def index(request):
 
-    song_list = Song.objects.order_by('-listens')[:5]
+    songs = Song.objects.order_by('-listens')[:5]
     albums = Album.objects.all()[:8]
     
     user_playlists = None
@@ -22,7 +22,7 @@ def index(request):
         user_playlists = Playlist.objects.filter(user=request.user)[:4]
 
     context_dict = {
-        'songs': song_list,
+        'songs': songs,
         'albums': albums,
         'user_playlists': user_playlists,
     }
