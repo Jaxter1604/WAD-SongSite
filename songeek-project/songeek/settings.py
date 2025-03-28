@@ -31,7 +31,8 @@ SECRET_KEY = 'n)#+1iw*fw(r-4cu8lh5@uf7y8o$elv(v(oab8w&nbsw5-08#j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jaxter1604.pythonanywhere.com',
+                 '127.0.0.1']
 
 
 # Application definition
